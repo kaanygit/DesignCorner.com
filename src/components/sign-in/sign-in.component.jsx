@@ -9,7 +9,7 @@ const SignIn=()=>{
     }
     return(
         <>
-            <div className="sign-in-container bg-gray-200 rounded-2xl shadow-xl p-10 flex flex-col items-center">
+            <div className="sign-in-container bg-gray-200 rounded-2xl shadow-xl p-10 flex flex-col items-center justify-center">
                 <form onSubmit={handleSubmit} className="w-full">
                     <h1 className="text-3xl font-bold text-woodColor mb-5">Sign In</h1>
                     <div className="mb-5">

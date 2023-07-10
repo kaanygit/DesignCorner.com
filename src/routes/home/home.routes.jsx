@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
-
+import HomeSlider from '../../components/home-slider/home-slider.component'
 
 const Home=()=>{
     return(
         <>
-            <div className="home-routes bg-gray-500 w-96">
-                <h1>asdasdasdasdsd</h1>
+            <div className="home-routes">
+                <HomeSlider/>
             </div>
             <Outlet/>
         </>
