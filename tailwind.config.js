@@ -13,7 +13,7 @@ module.exports = withMT({
       },
       fontFamily: {
         'montserrat-alternates': ['Montserrat Alternates', 'sans-serif'],
-      },
+      }
     },
   },
   plugins: [],
