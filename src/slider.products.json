@@ -1,0 +1,115 @@
+[
+    {
+      "key": 1,
+      "name": "Modern Armchair",
+      "imageUrl": "https://media.istockphoto.com/id/1298089431/vector/white-armchair-with-wooden-legs-realistic-vector-armchair-in-the-loft-style-separate-on-a.jpg?s=612x612&w=0&k=20&c=kOR2f0Ft_j96a-FBGaVDgYLRcmepDnacLsUR6jOh2yk=",
+      "price": 799,
+      "discountRate": 20,
+      "productInformation": "Bla Bla Bla"
+    },
+    {
+      "key": 2,
+      "name": "ArmChair",
+      "imageUrl": "https://media.istockphoto.com/id/1161389159/photo/white-color-armchair-style-modern-chair-isolated-on-a-white-background.jpg?s=170667a&w=0&k=20&c=ta0S1orq8N_cF52qIPugF2h2ncp1q5HCasu_vg7RLdE=",
+      "price": 899,
+      "discountRate": 10,
+      "productInformation": "Bla Bla Bla"
+    },
+    {
+      "key": 3,
+      "name": "Table",
+      "imageUrl": "https://media.istockphoto.com/id/1127074994/vector/realistic-white-table-isolated-on-white-background-white-office-table-with-shadow-vector.jpg?s=170667a&w=0&k=20&c=FkcmzDyapJ9whERhEWrHcoSlO_vWJEHRP1X1ZX-5QQs=",
+      "price": 199,
+      "discountRate": 40,
+      "productInformation": "Bla Bla Bla"
+    },
+    {
+      "key": 4,
+      "name": "Chair",
+      "imageUrl": "https://www.freeiconspng.com/uploads/white-chair-png-31.png",
+      "price": 249,
+      "discountRate": 70,
+      "productInformation": "Bla Bla Bla"
+    },
+    {
+      "key": 5,
+      "name": "Sofa",
+      "imageUrl": "https://t3.ftcdn.net/jpg/03/91/10/84/360_F_391108454_Td5j8gNrkCHf9Hhyfdp6fK0b9SCj3NON.jpg",
+      "price": 150,
+      "discountRate": 20,
+      "productInformation": "Bla Bla Bla"
+    },
+    {
+      "key": 6,
+      "name": "Sofa",
+      "imageUrl": "https://content.cylindo.com/api/v2/4916/products/30156-01/frames/4/30156-01.JPG?background=FFFFFF&feature=UPHOLSTERY:JI728&feature=LEGS:XS931",
+      "price": 349,
+      "discountRate": 10,
+      "productInformation": "Bla Bla Bla"
+    },
+    {
+      "key": 7,
+      "name": "Sofa",
+      "imageUrl":"https://images.eq3.com/product-definitions/ckh3u370s7dxy01269b6hyibb/instance/ckwl5fymw000238618kzgyyf2/THUMBNAIL/343bda99-69a5-4898-a62b-45e572250344.jpg",
+      "price": 549,
+      "discountRate": 9,
+      "productInformation": "Bla Bla Bla"
+    },
+    {
+      "key": 8,
+      "name": "Sofa",
+      "imageUrl":"https://images.eq3.com/product-definitions/ckh3u370s7dxy01269b6hyibb/instance/ckwl5fymw000238618kzgyyf2/THUMBNAIL/343bda99-69a5-4898-a62b-45e572250344.jpg",
+      "price": 124,
+      "discountRate": 10,
+      "productInformation": "Bla Bla Bla"
+    },
+    {
+      "key": 9,
+      "name": "Sofa",
+      "imageUrl":"https://images.eq3.com/product-definitions/ckh3u370s7dxy01269b6hyibb/instance/ckwl5fymw000238618kzgyyf2/THUMBNAIL/343bda99-69a5-4898-a62b-45e572250344.jpg",
+      "price": 632,
+      "discountRate": 75,
+      "productInformation": "Bla Bla Bla"
+    },
+    {
+      "key": 10,
+      "name": "Sofa",
+      "imageUrl":"https://images.eq3.com/product-definitions/ckh3u370s7dxy01269b6hyibb/instance/ckwl5fymw000238618kzgyyf2/THUMBNAIL/343bda99-69a5-4898-a62b-45e572250344.jpg",
+      "price": 12,
+      "discountRate": 12,
+      "productInformation": "Bla Bla Bla"
+    },
+    {
+      "key": 11,
+      "name": "Sofa",
+      "imageUrl":"https://images.eq3.com/product-definitions/ckh3u370s7dxy01269b6hyibb/instance/ckwl5fymw000238618kzgyyf2/THUMBNAIL/343bda99-69a5-4898-a62b-45e572250344.jpg",
+      "price": 61251,
+      "discountRate": 24,
+      "productInformation": "Bla Bla Bla"
+    },
+    {
+      "key": 12,
+      "name": "Sofa",
+      "imageUrl":"https://images.eq3.com/product-definitions/ckh3u370s7dxy01269b6hyibb/instance/ckwl5fymw000238618kzgyyf2/THUMBNAIL/343bda99-69a5-4898-a62b-45e572250344.jpg",
+      "price": 5115,
+      "discountRate": 421,
+      "productInformation": "Bla Bla Bla"
+    },
+    {
+      "key": 13,
+      "name": "Sofa",
+      "imageUrl":"https://images.eq3.com/product-definitions/ckh3u370s7dxy01269b6hyibb/instance/ckwl5fymw000238618kzgyyf2/THUMBNAIL/343bda99-69a5-4898-a62b-45e572250344.jpg",
+      "price": 42,
+      "discountRate": 12,
+      "productInformation": "Bla Bla Bla"
+    },
+    {
+      "key": 14,
+      "name": "Sofa",
+      "imageUrl":"https://images.eq3.com/product-definitions/ckh3u370s7dxy01269b6hyibb/instance/ckwl5fymw000238618kzgyyf2/THUMBNAIL/343bda99-69a5-4898-a62b-45e572250344.jpg",
+      "price": 123,
+      "discountRate": 0,
+      "productInformation": "Bla Bla Bla"
+    }
+  ]
+  

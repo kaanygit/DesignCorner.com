@@ -24,7 +24,7 @@ const Navigation=()=>{
     }
     return(
         <>  
-          <nav className="navigation max-w-screen w-full h-auto sticky shadow-2xl  items-center text-center justify-between p-8 font-montserrat-alternates">
+          <nav className="navigation max-w-screen w-full h-auto sticky shadow-2xl  items-center text-center justify-between p-8 font-montserrat-alternates z-50">
                 <div className="navigation-divs grid grid-cols-3">
                     <div className="nav-tab-first flex items-center">
                         <h1 className="text-2xl font-bold text-gray-900">DesignCorner.com</h1>
@@ -46,20 +46,22 @@ const Navigation=()=>{
                                 </svg>
                             </button>
                             {isMenuOpen && (
-                                <div className="absolute top-10 left-0  bg-white rounded-xl shadow-lg p-10 bg-gray-300">
-                                    <div className="asdas grid grid-cols-2 gap-8 w-40 ">
-                                        {products.map((product)=>(
-                                            <div key={product.id}>
-                                                <div className="asd pb-3">
-                                                    <Link to={`/${product.name}`}>
-                                                        <img className="imageUrl w-5/5 h-20" src={product.imgUrl} alt={product.name}/>
-                                                        <span className="assdsd text-center ">{product.name}</span>
-                                                    </Link>
+                                <div className="relative">
+                                    <div className="absolute top-10 left-0  bg-white rounded-xl shadow-lg p-10 bg-gray-300 z-50">
+                                        <div className="asdas grid grid-cols-2 gap-8 w-40 ">
+                                            {products.map((product)=>(
+                                                <div key={product.id}>
+                                                    <div className="asd pb-3">
+                                                        <Link to={`/${product.name}`}>
+                                                            <img className="imageUrl w-5/5 h-20" src={product.imgUrl} alt={product.name}/>
+                                                            <span className="assdsd text-center ">{product.name}</span>
+                                                        </Link>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                    ))}
-                                    </div>
-                                    </div>
+                                        ))}
+                                        </div>
+                                        </div>
+                                </div>
                                 )}
                         </div>
                             <Link to="/contact" className="contact-section-nav-tab text-woodColor">Contact</Link>
