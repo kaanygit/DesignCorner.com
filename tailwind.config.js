@@ -9,12 +9,17 @@ module.exports = withMT({
   theme: {
     extend: {
       colors:{
-        woodColor:'#8B4513'
+        woodColor:'#8B4513',
+        twitterColor:'#00acee',
+        facebookColor:'#0165E1',
+        instagramColor:'#E1306C'
       },
       fontFamily: {
         'montserrat-alternates': ['Montserrat Alternates', 'sans-serif'],
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar-hide')
+  ],
 });
