@@ -1,12 +1,13 @@
 import {BsTwitter,BsFacebook} from 'react-icons/bs'
 import {FaInstagram} from 'react-icons/fa'
-
+import {AiFillGithub} from 'react-icons/ai'
+import { Link } from 'react-router-dom'
 
 
 const FooterSection=()=>{
     return(
         <>
-            <div className="w-full h-full p-5 flex bg-gray-900 text-white ">
+            <div className="w-full h-full p-16 flex bg-gray-900 text-white ">
                 <div className='w-full h-full'>
                     <div>
                         <span className="text-4xl font-bold">DesignCorner.com</span>
@@ -68,6 +69,7 @@ const FooterSection=()=>{
                                 <h1 className='mt-3 text-2xl text-instagramColor'><FaInstagram/></h1>
                                 <h1 className='mt-4 text-2xl text-facebookColor'><BsFacebook/></h1>
                                 <h1 className='mt-4 text-2xl text-twitterColor'><BsTwitter/></h1>
+                                <Link to='https://github.com/kaanygit' className='mt-4 text-2xl text-white'><AiFillGithub/></Link>
                             </div>
                         </div>
                     </div>

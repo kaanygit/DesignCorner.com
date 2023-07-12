@@ -36,8 +36,10 @@ const HomePageSectionContent=()=>{
                             <div className="grid grid-cols-5 gap-6 mt-5 w-full">
                                 {PRODUCT.map((products)=>(
                                     <div className="relative">
-                                        <div className="transition-transfrom transform-gpu hover:scale-110 hover:duration-500">
-                                            <img className="w-64 h-48" src={products.imageUrl} alt={products.name}/>
+                                        <div className="w-full h-full">
+                                            <div className="groupImage transition-transfrom transform-gpu  overflow-hidden">
+                                                <img className="w-64 h-48  hover:scale-110 hover:duration-500 " src={products.imageUrl} alt={products.name}/>
+                                            </div>
                                             <div className="items-center flex justify-between w-full bg-gray-100 p-2">
                                                 <span>{products.name}</span>
                                                 <button className="block pr-3"><UilShoppingCartAlt /></button>
