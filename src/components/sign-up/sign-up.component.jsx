@@ -13,8 +13,9 @@ const defaultForms={
 
 const SignUp=()=>{
     const [seePassword,setSeePassword]=useState(false);
-    const [formValue,setFormValue]=useState(defaultForms)
-    const [mongoseForm,setMongoseForm]=useState(defaultForms)
+    const [formValue,setFormValue]=useState(defaultForms);
+    const [mongoseForm,setMongoseForm]=useState(defaultForms);
+
 
     const {name,surname,email,password,confirmPassword}=formValue;
     const resetDefaultForms=()=>{setFormValue(defaultForms)};
@@ -47,27 +48,12 @@ const SignUp=()=>{
             alert("Passwords are not equal");
             return;
         }
-
-            fetch("http://localhost:5000/register",{
-                method:"POST",
-                crossDomain:true,
-                headers:{
-                    "Content-type":"application/json",
-                    Accept:"application/json",
-                    "Access-Control-Allow-Origin":"*",
-                },
-                body:JSON.stringify({
-                    name,
-                    surname,
-                    email,
-                    password
-                }),
-            }).then((res)=>res.json())
-            .then((data)=>{
-                console.log(data,"UserRegister");
-            });
+        try {
             setMongoseForm(formValue);
             resetDefaultForms();
+        } catch (error) {
+            console.log(error);
+        }
     }
     console.log(mongoseForm);
     return (
