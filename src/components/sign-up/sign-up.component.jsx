@@ -2,9 +2,30 @@ import { Button, Input, Typography } from "@material-tailwind/react"
 import { useState } from "react"
 
 
+const defaultForms={
+    name:"",
+    surname:"",
+    email:"",
+    password:"",
+    confirmPassword:""
+}
+ 
 
 const SignUp=()=>{
     const [seePassword,setSeePassword]=useState(false);
+    const [formValue,setFormValue]=useState(defaultForms)
+    const [mongoseForm,setMongoseForm]=useState(defaultForms)
+
+    const {name,surname,email,password,confirmPassword}=formValue;
+    const resetDefaultForms=()=>{setFormValue(defaultForms)};
+    
+    // e.preventDefault();
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormValue({ ...formValue, [name]: value });
+    };
+    console.log(formValue);
     const handleSeePassword=()=>{
         setSeePassword(!seePassword);
     }
@@ -20,9 +41,35 @@ const SignUp=()=>{
         </svg>
 
     )
-    const handleSubmit=()=>{
-        console.log('SignIn ');
+    const handleSubmit=async(e)=>{
+        e.preventDefault();
+        if(password!==confirmPassword){
+            alert("Passwords are not equal");
+            return;
+        }
+
+            fetch("http://localhost:5000/register",{
+                method:"POST",
+                crossDomain:true,
+                headers:{
+                    "Content-type":"application/json",
+                    Accept:"application/json",
+                    "Access-Control-Allow-Origin":"*",
+                },
+                body:JSON.stringify({
+                    name,
+                    surname,
+                    email,
+                    password
+                }),
+            }).then((res)=>res.json())
+            .then((data)=>{
+                console.log(data,"UserRegister");
+            });
+            setMongoseForm(formValue);
+            resetDefaultForms();
     }
+    console.log(mongoseForm);
     return (
         <>
             <div>
@@ -33,23 +80,22 @@ const SignUp=()=>{
                         </div>
                         <form onSubmit={handleSubmit}>
                             <div className="mb-5">
-                                <Input label="Name" type="text" required/>
+                                <Input name="name" label="name" value={name} type="text" onChange={handleChange} required/>
                             </div>
                             <div className="mb-5">
-
-                                <Input label="Surname" type="text" required/>
+                                <Input label="Surname" name="surname" value={surname} type="text" onChange={handleChange} required/>
                             </div>
                             <div className="mb-5">
-                                <Input label="E-mail" type="email" required/>
+                                <Input label="E-mail" name="email" value={email} type="email" onChange={handleChange} required/>
                             </div>
                             <div className="mb-5">
-                                <Input label="Password" type="password" icon={seePassword?passwordSee:passwordNotSee} required/>
+                                <Input label="Password" name="password" type="password" value={password} onChange={handleChange} icon={seePassword?passwordSee:passwordNotSee} required/>
                                 <Typography variant="small" color="gray" className="flex items-center gap-1 font-normal mt-2">
                                     Use at least 8 characters, one uppercase, one lowercase and one number!
                                 </Typography>
                             </div>
                             <div className="mb-5">
-                                <Input label="Confirm Password" type="password" required/>
+                                <Input label="Confirm Password" name="confirmPassword" value={confirmPassword} onChange={handleChange} type="password" required/>
                             </div>
                             <Button fullWidth type="submit">Sign Up</Button>
                         </form>
