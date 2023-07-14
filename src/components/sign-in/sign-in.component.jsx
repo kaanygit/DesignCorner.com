@@ -1,6 +1,8 @@
 import { Button, Input } from "@material-tailwind/react";
+import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const defaultSignForm={
     "email":"",
@@ -24,10 +26,16 @@ const SignIn=()=>{
         e.preventDefault();
         try {
             setFormData(formValue);
-            console.log('SignIn ');
+            axios.post('http://localhost:5000/signin',formData).then((response)=>{
+                console.log(response.data);
+                localStorage.setItem('token',response.data.token);
+                window.location.href='/';
+            }).catch((error)=>{
+                toast.error(error.response.data.error);
+            })
             resetDefaultForms();
         } catch (error) {
-            console.log("Error !! : ",error);
+            toast.log("Error !! : ",error);
         }
     };
     console.log(formData);

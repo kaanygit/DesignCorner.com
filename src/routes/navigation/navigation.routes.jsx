@@ -6,6 +6,11 @@ import WoodChair from '../../assets/woodchair.jpg'
 import WoodSofa from '../../assets/woodsofa.webp'
 import WoodTable from '../../assets/woodtable.webp'
 import { UilShoppingCartAlt ,UilMoon,UilSun} from '@iconscout/react-unicons'
+import { useContext } from "react"
+import { TokenInitialState } from "../../context/user.context"
+import { Button } from "@material-tailwind/react"
+import { useDispatch, useSelector } from "react-redux"
+import { setToken } from "../../redux/store"
 
 const products= [
     { name: 'Armchair',id:1,imgUrl:ArmChair },
@@ -19,9 +24,22 @@ const products= [
 
 const Navigation=()=>{
     const [isMenuOpen,setMenuOpen]=useState(false);
+    const [userMenuOpen,setUserMenuOpen]=useState(false);
+    const dispatch=useDispatch();
+    const token=useSelector((state)=>state.token);
+
     const handleMenuToggle=()=>{
         setMenuOpen(!isMenuOpen);
     }
+    const handleUserMenuToogle=()=>{
+        setUserMenuOpen(!userMenuOpen);
+    }
+    const signOutUser=()=>{
+        dispatch(setToken(null));
+        window.location.href=("/");
+    }
+
+    
     return(
         <>  
           <nav className="navigation max-w-screen w-full h-auto sticky shadow-2xl  items-center text-center justify-between p-8 font-montserrat-alternates z-50">
@@ -67,7 +85,26 @@ const Navigation=()=>{
                             <Link to="/contact" className="contact-section-nav-tab text-woodColor">Contact</Link>
                         </div>
                         <div className="nav-tab-third flex items-center justify-end space-x-4 text-xl">
-                            <Link to="/authentication" className="authentication-section-nav-tab text-woodColor">Login</Link>
+                            {token===null?(
+                                <>  
+                                    <Link to="/authentication" className="authentication-section-nav-tab text-woodColor">Login</Link>
+                                    
+                                </>
+                            ):(
+                                <>  
+                                    <div className="relative inline-block">
+                                        <span className="text-woodColor cursor-pointer" onClick={handleUserMenuToogle}>Test-User</span>
+                                        {userMenuOpen &&(
+                                            <div className="asd flex absolute bg-gray-500 z-10 right-0 mt-2 w-40 rounded-xl shadow-xl border">
+                                                <div className="p-5">
+                                                    <Link  to="/dashboard">Dashboard</Link>
+                                                    <button className="mt-2" onClick={signOutUser}>Sign Out</button>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                </>
+                            )}
                             <Link to="/checkout">
                                 <UilShoppingCartAlt />
                             </Link>

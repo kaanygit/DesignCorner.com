@@ -1,5 +1,7 @@
 import { Button, Input, Typography } from "@material-tailwind/react"
+import axios from "axios";
 import { useState } from "react"
+import { toast } from "react-toastify";
 
 
 const defaultForms={
@@ -50,12 +52,29 @@ const SignUp=()=>{
         }
         try {
             setMongoseForm(formValue);
+            axios.post('http://localhost:5000/signup',formValue).then((responseSignUp)=>{
+                console.log(responseSignUp.data);
+                axios.post('http://localhost:5000/signin',{email:formValue.email,password:formValue.password}).then((responseSignIn)=>{
+                    console.log(responseSignIn.data);
+                    localStorage.setItem('token',responseSignIn.data.token);
+                    // window.location.href='/';
+                }).catch((error)=>{
+                    toast.error(error.responseSignIn.data.error);
+                })
+            }).catch((error)=>{
+                // toast.error(error.responseSignUp.data.error);
+                if (error.responseSignUp && error.responseSignUp.data && error.responseSignUp.data.error === 'Email already exists.') {
+                    toast.error('Email already exists.'); // Hata mesajını göster
+                  } else {
+                    toast.error('An error occurred while creating the user.'); // Diğer hata durumlarını ele al
+                  }
+            })
             resetDefaultForms();
         } catch (error) {
-            console.log(error);
+            toast.log("Error : ",error);
         }
     }
-    console.log(mongoseForm);
+    console.log(formValue);
     return (
         <>
             <div>
