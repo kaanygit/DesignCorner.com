@@ -38,6 +38,7 @@ app.get('/products', (req, res) => {
       res.status(500).send('Sunucu hatası');
     });
 });
+module.exports=app;
 
 app.listen(port,()=>{
   console.log(`Sunucu ${port} portunda çalışıyor`);
