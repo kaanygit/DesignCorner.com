@@ -1,8 +1,10 @@
 import { Button, Input } from "@material-tailwind/react";
 import axios from "axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { setToken } from "../../redux/user.redux";
 
 const defaultSignForm={
     "email":"",
@@ -12,6 +14,7 @@ const defaultSignForm={
 const SignIn=()=>{
     const [formData,setFormData]=useState(defaultSignForm);
     const [formValue,setFormValue]=useState(defaultSignForm);
+    const dispatch=useDispatch();
     const resetDefaultForms=()=>{setFormValue(defaultSignForm)};
     
     
@@ -28,8 +31,8 @@ const SignIn=()=>{
             setFormData(formValue);
             axios.post('http://localhost:5000/signin',formData).then((response)=>{
                 console.log(response.data);
-                localStorage.setItem('token',response.data.token);
-                window.location.href='/';
+                const token=response.data.token;
+                dispatch(setToken(token));
             }).catch((error)=>{
                 toast.error(error.response.data.error);
             })

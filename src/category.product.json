@@ -1,0 +1,8 @@
+[
+    { "name": "armchair","key":1,"imgUrl":"https://media.istockphoto.com/id/1161389159/photo/white-color-armchair-style-modern-chair-isolated-on-a-white-background.jpg?s=170667a&w=0&k=20&c=ta0S1orq8N_cF52qIPugF2h2ncp1q5HCasu_vg7RLdE=" },
+    { "name": "chair","key":2,  "imgUrl":"https://media.istockphoto.com/id/1298089431/vector/white-armchair-with-wooden-legs-realistic-vector-armchair-in-the-loft-style-separate-on-a.jpg?s=612x612&w=0&k=20&c=kOR2f0Ft_j96a-FBGaVDgYLRcmepDnacLsUR6jOh2yk=" },
+    { "name": "table","key":3 ,"imgUrl":"https://media.istockphoto.com/id/1127074994/vector/realistic-white-table-isolated-on-white-background-white-office-table-with-shadow-vector.jpg?s=170667a&w=0&k=20&c=FkcmzDyapJ9whERhEWrHcoSlO_vWJEHRP1X1ZX-5QQs="},
+    { "name": "sofa", "key":4,"imgUrl":"https://t3.ftcdn.net/jpg/03/91/10/84/360_F_391108454_Td5j8gNrkCHf9Hhyfdp6fK0b9SCj3NON.jpg" },
+    { "name": "sofa","key":5, "imgUrl":"https://t3.ftcdn.net/jpg/03/91/10/84/360_F_391108454_Td5j8gNrkCHf9Hhyfdp6fK0b9SCj3NON.jpg" },
+    { "name": "table","key":6, "imgUrl":"https://media.istockphoto.com/id/1127074994/vector/realistic-white-table-isolated-on-white-background-white-office-table-with-shadow-vector.jpg?s=170667a&w=0&k=20&c=FkcmzDyapJ9whERhEWrHcoSlO_vWJEHRP1X1ZX-5QQs=" }
+]

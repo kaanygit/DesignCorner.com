@@ -1,13 +1,16 @@
 import { UilAngleLeft,UilAngleRight,UilArrowRight  } from '@iconscout/react-unicons'
-import HomeSliderList from '../../slider.products.json'
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Transition } from '@headlessui/react';
+import { DataContext } from '../../context/products.context';
 
 
 
 const HomeSlider=()=>{
     const [showPageTransition,setShowPageTransition]=useState(false);
     const [sliderIndex,setSliderIndex]=useState(1);
+    const HomeSliderList=useContext(DataContext);
+
+
     const sliderListLenght=HomeSliderList.length;
     const sliderBack=()=>{
         if(sliderIndex<=1){
@@ -42,7 +45,7 @@ const HomeSlider=()=>{
                     <div className='flex items-center justify-center w-full h-full col-span-3 '>
                         {HomeSliderList.map((productSlider)=>(
                             sliderIndex===productSlider.key ? (                            
-                                <div key={productSlider.key} className='flex pb-32 pr-32 pl-32 pt-20 items-center w-full h-full relative'>
+                                <div key={productSlider._id} className='flex pb-32 pr-32 pl-32 pt-20 items-center w-full h-full relative'>
                                     <Transition show={showPageTransition} enter='transition-opacity duration-1000' enterFrom='opacity-0' enterTo='opacity-100'>
                                         <img className='w-full h-full rounded-3xl' src={productSlider.imageUrl} alt={productSlider.name}/>
                                     </Transition>

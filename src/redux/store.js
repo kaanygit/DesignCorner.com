@@ -1,34 +1,11 @@
 import { createStore } from "redux";
+import { persistStore } from "redux-persist";
+import persistedReducer from "./user.redux";
 
-//action types
-const SET_TOKEN="SET_TOKEN";
 
-//action creator
 
-export const setToken=(token)=>({
-    type:SET_TOKEN,
-    payload:token,
-});
 
-//initial state
-const initialState = {
-    token: localStorage.getItem('token') || null,
-  };
+const store=createStore(persistedReducer);
+const persistor=persistStore(store);
 
-//reducer
-const reducer=(state=initialState,action)=>{
-    switch(action.type){
-        case SET_TOKEN:
-            localStorage.setItem('token', action.payload);
-            return {
-              ...state,
-              token: action.payload,
-            };
-          default:
-            return state;
-    }
-};
-
-const store=createStore(reducer);
-
-export default store;
+export {store,persistor}
