@@ -1,42 +1,38 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link, Outlet } from "react-router-dom"
 
-import ArmChair from '../../assets/armchair.jpg'
-import WoodChair from '../../assets/woodchair.jpg'
-import WoodSofa from '../../assets/woodsofa.webp'
-import WoodTable from '../../assets/woodtable.webp'
 import { UilShoppingCartAlt ,UilMoon,UilSun} from '@iconscout/react-unicons'
-import { useContext } from "react"
-import { TokenInitialState } from "../../context/user.context"
-import { Button } from "@material-tailwind/react"
 import { useDispatch, useSelector } from "react-redux"
-import { setToken } from "../../redux/store"
+import { setToken } from "../../redux/user.redux"
+import products from "../../category.product.json"
+import { Button } from "@material-tailwind/react"
 
-const products= [
-    { name: 'Armchair',id:1,imgUrl:ArmChair },
-    { name: 'Chair',id:2,  imgUrl:WoodChair },
-    { name: 'Table',id:3 ,imgUrl:WoodTable},
-    { name: 'Sofa', id:4,imgUrl:WoodSofa },
-    { name: 'Coming Soon',id:5, imgUrl:ArmChair },
-    { name: 'Coming Soon',id:6, imgUrl:ArmChair },
-]
 
 
 const Navigation=()=>{
     const [isMenuOpen,setMenuOpen]=useState(false);
     const [userMenuOpen,setUserMenuOpen]=useState(false);
+    const [checkoutMenuOpen,setCheckoutMenuOpen]=useState(false);
     const dispatch=useDispatch();
     const token=useSelector((state)=>state.token);
 
+    useEffect(()=>{
+        console.log(token);
+        
+    },[token])
+
     const handleMenuToggle=()=>{
         setMenuOpen(!isMenuOpen);
-    }
+    };
     const handleUserMenuToogle=()=>{
         setUserMenuOpen(!userMenuOpen);
-    }
+    };
     const signOutUser=()=>{
         dispatch(setToken(null));
         window.location.href=("/");
+    };
+    const checkoutOpen=()=>{
+        setCheckoutMenuOpen(!checkoutMenuOpen);
     }
 
     
@@ -68,9 +64,9 @@ const Navigation=()=>{
                                     <div className="absolute top-10 left-0  bg-white rounded-xl shadow-lg p-10 bg-gray-300 z-50">
                                         <div className="asdas grid grid-cols-2 gap-8 w-40 ">
                                             {products.map((product)=>(
-                                                <div key={product.id}>
+                                                <div key={product.key}>
                                                     <div className="asd pb-3">
-                                                        <Link to={`/${product.name}`}>
+                                                        <Link to={`/products/${product.name}`}>
                                                             <img className="imageUrl w-5/5 h-20" src={product.imgUrl} alt={product.name}/>
                                                             <span className="assdsd text-center ">{product.name}</span>
                                                         </Link>
@@ -105,9 +101,60 @@ const Navigation=()=>{
                                     </div>
                                 </>
                             )}
-                            <Link to="/checkout">
-                                <UilShoppingCartAlt />
-                            </Link>
+                            <div className="relative">
+                                <button onClick={checkoutOpen}>
+                                    <UilShoppingCartAlt />
+                                </button>
+                                {checkoutMenuOpen && (
+                                    <div className="absolute top-0 right-0 mt-12 w-96  bg-gray-100 border border-woodColor rounded-xl shadow">
+                                        <div className="flex justify-evenly pt-3 pb-3 w-full h-full">
+                                            <div>
+                                                <img className="w-48 h-32" src="https://t3.ftcdn.net/jpg/03/91/10/84/360_F_391108454_Td5j8gNrkCHf9Hhyfdp6fK0b9SCj3NON.jpg" alt="resim" />
+                                            </div>
+                                            <div className="h-full">
+                                                <div className="text-xl font-bold ">
+                                                    Sofa
+                                                </div>
+                                                <div className="justify-evenly text-medium mt-3">
+                                                    <div className="flex">
+                                                        <div>Adet</div>
+                                                        <div className="flex">
+                                                            <button>+</button>
+                                                            <button>-</button>
+                                                        </div>
+                                                    </div>
+                                                    <div className="mt-3"> 249 tl</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="flex justify-evenly pt-3 pb-3 w-full h-full">
+                                            <div>
+                                                <img className="w-48 h-32" src="https://t3.ftcdn.net/jpg/03/91/10/84/360_F_391108454_Td5j8gNrkCHf9Hhyfdp6fK0b9SCj3NON.jpg" alt="resim" />
+                                            </div>
+                                            <div className="h-full">
+                                                <div className="text-xl font-bold ">
+                                                    Sofa
+                                                </div>
+                                                <div className="justify-evenly text-medium mt-3">
+                                                    <div className="flex">
+                                                        <div>Adet</div>
+                                                        <div className="flex">
+                                                            <button>+</button>
+                                                            <button>-</button>
+                                                        </div>
+                                                    </div>
+                                                    <div className="mt-3"> 249 tl</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <Link to="/checkout">
+                                            <Button className="w-full" color="brown">Go to Checkout</Button>
+                                        </Link>
+
+                                    </div>
+                                )}
+                            </div>
+
                             <UilMoon />
                             <UilSun className="sun hidden" />
                         </div>

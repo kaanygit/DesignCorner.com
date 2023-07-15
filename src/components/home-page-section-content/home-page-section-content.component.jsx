@@ -1,13 +1,13 @@
 import { Transition } from "@headlessui/react";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import Foto from '../../assets/woodchair.jpg'
-import PRODUCT from '../../slider.products.json'
 import {UilShoppingCartAlt} from '@iconscout/react-unicons'
+import { DataContext } from "../../context/products.context";
 
 const HomePageSectionContent=()=>{
     const [showSectionContent,setShowSectionContent]=useState(false);
-
+    const PRODUCT=useContext(DataContext);
     useEffect(()=>{
         const handleScroll=()=>{
             const scrollPosition =window.scrollY;
@@ -35,7 +35,7 @@ const HomePageSectionContent=()=>{
                         <div>
                             <div className="grid grid-cols-5 gap-6 mt-5 w-full">
                                 {PRODUCT.map((products)=>(
-                                    <div className="relative">
+                                    <div className="relative" key={products.key}>
                                         <div className="w-full h-full">
                                             <div className="groupImage transition-transfrom transform-gpu  overflow-hidden">
                                                 <img className="w-64 h-48  hover:scale-110 hover:duration-500 " src={products.imageUrl} alt={products.name}/>

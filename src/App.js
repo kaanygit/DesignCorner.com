@@ -8,27 +8,30 @@ import NotFound from './routes/notFound/notFound.routes'
 import Checkout from "./routes/checkout/checkout.routes";
 import ForgotPassword from './components/forgotPassword/forgot-password.component'
 import Dashboard from './routes/dashboard/dashboard.routes'
-import { Provider, useSelector } from "react-redux";
-import store from "./redux/store";
-
+import { useSelector } from "react-redux";
+import ProductPage from "./components/productPage/product-page.component";
+import ProductCategoryPage from "./components/productCategoryPage/product-category-page.component";
 function App() {
   const token=useSelector((state)=>state.token);
+  // const productCategoryRoute=useContext(DataContext);
 
   return (
     <Routes>
       <Route path='/' element={<Navigation/>}>
         <Route index element={<Home/>}/>
         <Route path='products' element={<Products/>}/>
+        <Route path="products/:categoryName" element={<ProductCategoryPage/>}/>
+        <Route path="products/:categoryName/:productId" element={<ProductPage/>}/>
         <Route path='contact' element={<Contact/>} />
         <Route path='checkout' element={<Checkout/>} />
         <Route path="*" element={<NotFound/>} />
 
 
-        {!token?(
+        {token?(
           <Route path="dashboard" element={<Dashboard/>} />
         ):null}
       </Route>
-      {token!==null?(
+      {!token?(
         <Route path="/authentication" element={<Authentication/>}/>
       ):(
         null

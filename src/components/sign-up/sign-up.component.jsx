@@ -2,6 +2,8 @@ import { Button, Input, Typography } from "@material-tailwind/react"
 import axios from "axios";
 import { useState } from "react"
 import { toast } from "react-toastify";
+import { setToken } from "../../redux/user.redux";
+import { useDispatch } from "react-redux";
 
 
 const defaultForms={
@@ -17,6 +19,7 @@ const SignUp=()=>{
     const [seePassword,setSeePassword]=useState(false);
     const [formValue,setFormValue]=useState(defaultForms);
     const [mongoseForm,setMongoseForm]=useState(defaultForms);
+    const dispatch=useDispatch();
 
 
     const {name,surname,email,password,confirmPassword}=formValue;
@@ -55,14 +58,13 @@ const SignUp=()=>{
             axios.post('http://localhost:5000/signup',formValue).then((responseSignUp)=>{
                 console.log(responseSignUp.data);
                 axios.post('http://localhost:5000/signin',{email:formValue.email,password:formValue.password}).then((responseSignIn)=>{
-                    console.log(responseSignIn.data);
-                    localStorage.setItem('token',responseSignIn.data.token);
-                    // window.location.href='/';
+                    const token=responseSignIn.data.token;
+                    dispatch(setToken(token));                    
+                    window.location.href='/';
                 }).catch((error)=>{
                     toast.error(error.responseSignIn.data.error);
                 })
             }).catch((error)=>{
-                // toast.error(error.responseSignUp.data.error);
                 if (error.responseSignUp && error.responseSignUp.data && error.responseSignUp.data.error === 'Email already exists.') {
                     toast.error('Email already exists.'); // Hata mesajını göster
                   } else {
