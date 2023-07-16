@@ -2,7 +2,7 @@ import { Button, Input, Typography } from "@material-tailwind/react"
 import axios from "axios";
 import { useState } from "react"
 import { toast } from "react-toastify";
-import { setToken } from "../../redux/user.redux";
+import {setToken} from "../../redux/user/user.action"
 import { useDispatch } from "react-redux";
 
 

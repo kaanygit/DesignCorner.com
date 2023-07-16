@@ -1,4 +1,4 @@
-import { Routes,Route } from "react-router-dom";
+import { Routes,Route, Navigate } from "react-router-dom";
 import Navigation from './routes/navigation/navigation.routes'
 import Home from './routes/home/home.routes'
 import Products from "./routes/products/products.routes";
@@ -8,13 +8,15 @@ import NotFound from './routes/notFound/notFound.routes'
 import Checkout from "./routes/checkout/checkout.routes";
 import ForgotPassword from './components/forgotPassword/forgot-password.component'
 import Dashboard from './routes/dashboard/dashboard.routes'
-import { useSelector } from "react-redux";
 import ProductPage from "./components/productPage/product-page.component";
 import ProductCategoryPage from "./components/productCategoryPage/product-category-page.component";
-function App() {
-  const token=useSelector((state)=>state.token);
-  // const productCategoryRoute=useContext(DataContext);
+import { useSelector } from "react-redux";
+import { selectToken } from "./redux/user/user.selector";
 
+
+function App() {
+  const token=useSelector(selectToken);
+  console.log(token);
   return (
     <Routes>
       <Route path='/' element={<Navigation/>}>
@@ -25,18 +27,12 @@ function App() {
         <Route path='contact' element={<Contact/>} />
         <Route path='checkout' element={<Checkout/>} />
         <Route path="*" element={<NotFound/>} />
-
-
-        {token?(
-          <Route path="dashboard" element={<Dashboard/>} />
-        ):null}
+        <Route path="dashboard" element={token?<Navigate to="/authentication"/>:<Dashboard/>}/>
       </Route>
-      {!token?(
-        <Route path="/authentication" element={<Authentication/>}/>
-      ):(
-        null
-      )}
-      <Route path="/forgotpassword" element={<ForgotPassword/>}/>
+
+        <Route path="/authentication" element={token?<Authentication/>:<Navigate to="/dashboard"/>}>
+          <Route path="forgotpassword" element={<ForgotPassword/>}/>
+        </Route>
     </Routes>
 );
 }

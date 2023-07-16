@@ -1,8 +1,11 @@
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
+import {UilArrowRight } from '@iconscout/react-unicons'
 import { DataContext } from "../../context/products.context";
-import ProductCategoryPage from "../productCategoryPage/product-category-page.component";
 import { Button } from "@material-tailwind/react";
+import { useDispatch } from "react-redux";
+import { setProduct } from "../../redux/checkoutCart/checkout.action";
+
 
 
 
@@ -11,14 +14,28 @@ import { Button } from "@material-tailwind/react";
 const ProductPage=()=>{
     const {productId}=useParams();
     const productsData = useContext(DataContext);
-
+    const dispatch=useDispatch();
+    
     const products = productsData.find(product => product.key === parseInt(productId));
-    console.log(products);
-    console.log(productId);
 
+    
     const handleCheckout=()=>{
         console.log("add Checkout Item : ",productId);
-    }
+        console.log(products);
+        dispatch(setProduct(products));
+        console.log(dispatch(setProduct(products)));
+    };
+    if (!products) {
+        return (
+            <div className="flex items-center justify-center min-h-screen p-5 bg-gray-100 min-w-screen">
+                <div className="flex space-x-2 animate-pulse">
+                    <div className="w-3 h-3 bg-gray-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-gray-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-gray-500 rounded-full"></div>
+                </div>
+            </div>
+            );
+      }
 
     return(
         <>  
@@ -35,8 +52,10 @@ const ProductPage=()=>{
                             <div className="mt-4">
                                 <span className="font-medium text-lg">{products.productInformation}</span>
                             </div>
-                            <div className="mt-4">
-                                <span className="text-xl font-lg">{products.price} ₺</span>
+                            <div className="mt-4 flex">
+                                <div className="line-through">{products.price} ₺ </div>
+                                <div><UilArrowRight/></div>
+                                <div>{(products.price*products.discountRate)/100} ₺ </div>
                             </div>
                             <div>
                                 <Button onClick={handleCheckout} color="brown" className="mt-4">Add Checkout</Button>
