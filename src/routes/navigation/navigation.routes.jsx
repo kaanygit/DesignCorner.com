@@ -3,9 +3,10 @@ import { Link, Outlet } from "react-router-dom"
 
 import { UilShoppingCartAlt ,UilMoon,UilSun} from '@iconscout/react-unicons'
 import { useDispatch, useSelector } from "react-redux"
-import { setToken } from "../../redux/user.redux"
+import { removeToken } from "../../redux/user/user.action"
 import products from "../../category.product.json"
 import { Button } from "@material-tailwind/react"
+import { selectToken } from "../../redux/user/user.selector"
 
 
 
@@ -14,11 +15,14 @@ const Navigation=()=>{
     const [userMenuOpen,setUserMenuOpen]=useState(false);
     const [checkoutMenuOpen,setCheckoutMenuOpen]=useState(false);
     const dispatch=useDispatch();
-    const token=useSelector((state)=>state.token);
-
+    const token=useSelector(selectToken);
+    const [tokens,setTokens]=useState(null);
+    
+    console.log(tokens);
     useEffect(()=>{
-        console.log(token);
-        
+        if(token){
+            setTokens(token);
+        }
     },[token])
 
     const handleMenuToggle=()=>{
@@ -28,12 +32,13 @@ const Navigation=()=>{
         setUserMenuOpen(!userMenuOpen);
     };
     const signOutUser=()=>{
-        dispatch(setToken(null));
+        dispatch(removeToken());
         window.location.href=("/");
     };
     const checkoutOpen=()=>{
         setCheckoutMenuOpen(!checkoutMenuOpen);
     }
+
 
     
     return(
@@ -81,10 +86,9 @@ const Navigation=()=>{
                             <Link to="/contact" className="contact-section-nav-tab text-woodColor">Contact</Link>
                         </div>
                         <div className="nav-tab-third flex items-center justify-end space-x-4 text-xl">
-                            {token===null?(
+                            {tokens?(
                                 <>  
                                     <Link to="/authentication" className="authentication-section-nav-tab text-woodColor">Login</Link>
-                                    
                                 </>
                             ):(
                                 <>  
@@ -98,7 +102,7 @@ const Navigation=()=>{
                                                 </div>
                                             </div>
                                         )}
-                                    </div>
+                                    </div>                                    
                                 </>
                             )}
                             <div className="relative">

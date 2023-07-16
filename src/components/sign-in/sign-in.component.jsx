@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { setToken } from "../../redux/user.redux";
+import {setToken} from "../../redux/user/user.action"
 
 const defaultSignForm={
     "email":"",
@@ -33,6 +33,7 @@ const SignIn=()=>{
                 console.log(response.data);
                 const token=response.data.token;
                 dispatch(setToken(token));
+                window.location.href='/';
             }).catch((error)=>{
                 toast.error(error.response.data.error);
             })
