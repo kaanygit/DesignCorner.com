@@ -4,8 +4,7 @@ import {UilArrowRight } from '@iconscout/react-unicons'
 import { DataContext } from "../../context/products.context";
 import { Button } from "@material-tailwind/react";
 import { useDispatch } from "react-redux";
-import { setProduct } from "../../redux/checkoutCart/checkout.action";
-
+import {setProduct} from "../../redux/checkoutCart/checkout.action"
 
 
 
@@ -23,7 +22,6 @@ const ProductPage=()=>{
         console.log("add Checkout Item : ",productId);
         console.log(products);
         dispatch(setProduct(products));
-        console.log(dispatch(setProduct(products)));
     };
     if (!products) {
         return (

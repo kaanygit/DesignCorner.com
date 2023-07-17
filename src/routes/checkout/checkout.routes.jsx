@@ -1,15 +1,20 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { getProducts } from "../../redux/checkoutCart/checkout.selector";
-import { removeProduct } from "../../redux/checkoutCart/checkout.action";
-
+import CheckoutContext from '../../components/checkout-context/checkout-context.component'
+import { useEffect } from "react";
 const Checkout=()=>{
-    const dispatch=useDispatch();
+    // const dispatch=useDispatch();
     const products=useSelector(getProducts);
+    const totalCount=products.reduce((sum,product)=>
+        product.discountRate>0?sum+(((product.price*product.discountRate)/100)*product.count):sum+(product.price*product.count),
+        0
+    )
     
-    const deleteProduct=()=>{
-        dispatch(removeProduct(products._id))
-    }
-    console.log(products);
+    useEffect(()=>{
+        console.log(products);
+        
+    },[products])
+    console.log(totalCount);
 
     return(
         <>
@@ -22,12 +27,12 @@ const Checkout=()=>{
                         <div>PRICE</div>
                         <div>REMOVE</div>
                     </div>
-                    <div className="w-full h-full grid grid-cols-5 gap-3 text-center">
-                        <div>Product</div>
-                        <div>DESCRIPTION</div>
-                        <div>QUANTITY</div>
-                        <div>PRICE</div>
-                        <div>REMOVE</div>
+                    <CheckoutContext/>
+                    <div className="w-full">
+                        <hr/>
+                        <div className="justify-end flex pr-16 pt-10 text-3xl font-bold">
+                            <span>Total :{totalCount} ₺</span>
+                        </div>
                     </div>
                 </div>
             </div>

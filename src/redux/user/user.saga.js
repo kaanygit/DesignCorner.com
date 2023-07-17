@@ -1,6 +1,5 @@
 import { takeLatest, put, select, take } from 'redux-saga/effects';
 import { USER_TYPES } from './user.type';
-import {selectToken} from './user.selector'
 
 function* handleLogin(action){
     const {token}=action.payload;

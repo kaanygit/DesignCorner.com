@@ -1,23 +1,20 @@
 import { useEffect, useState } from "react"
 import { Link, Outlet } from "react-router-dom"
 
-import { UilShoppingCartAlt ,UilMoon,UilSun} from '@iconscout/react-unicons'
+import { UilMoon,UilSun} from '@iconscout/react-unicons'
 import { useDispatch, useSelector } from "react-redux"
 import { removeToken } from "../../redux/user/user.action"
 import products from "../../category.product.json"
-import { Button } from "@material-tailwind/react"
 import { selectToken } from "../../redux/user/user.selector"
-
-
+import CartItem from '../../components/cart-item/cart-item.component'
 
 const Navigation=()=>{
     const [isMenuOpen,setMenuOpen]=useState(false);
     const [userMenuOpen,setUserMenuOpen]=useState(false);
-    const [checkoutMenuOpen,setCheckoutMenuOpen]=useState(false);
     const dispatch=useDispatch();
     const token=useSelector(selectToken);
     const [tokens,setTokens]=useState(null);
-    
+
     console.log(tokens);
     useEffect(()=>{
         if(token){
@@ -35,10 +32,8 @@ const Navigation=()=>{
         dispatch(removeToken());
         window.location.href=("/");
     };
-    const checkoutOpen=()=>{
-        setCheckoutMenuOpen(!checkoutMenuOpen);
-    }
 
+    
 
     
     return(
@@ -105,59 +100,7 @@ const Navigation=()=>{
                                     </div>                                    
                                 </>
                             )}
-                            <div className="relative">
-                                <button onClick={checkoutOpen}>
-                                    <UilShoppingCartAlt />
-                                </button>
-                                {checkoutMenuOpen && (
-                                    <div className="absolute top-0 right-0 mt-12 w-96  bg-gray-100 border border-woodColor rounded-xl shadow">
-                                        <div className="flex justify-evenly pt-3 pb-3 w-full h-full">
-                                            <div>
-                                                <img className="w-48 h-32" src="https://t3.ftcdn.net/jpg/03/91/10/84/360_F_391108454_Td5j8gNrkCHf9Hhyfdp6fK0b9SCj3NON.jpg" alt="resim" />
-                                            </div>
-                                            <div className="h-full">
-                                                <div className="text-xl font-bold ">
-                                                    Sofa
-                                                </div>
-                                                <div className="justify-evenly text-medium mt-3">
-                                                    <div className="flex">
-                                                        <div>Adet</div>
-                                                        <div className="flex">
-                                                            <button>+</button>
-                                                            <button>-</button>
-                                                        </div>
-                                                    </div>
-                                                    <div className="mt-3"> 249 tl</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="flex justify-evenly pt-3 pb-3 w-full h-full">
-                                            <div>
-                                                <img className="w-48 h-32" src="https://t3.ftcdn.net/jpg/03/91/10/84/360_F_391108454_Td5j8gNrkCHf9Hhyfdp6fK0b9SCj3NON.jpg" alt="resim" />
-                                            </div>
-                                            <div className="h-full">
-                                                <div className="text-xl font-bold ">
-                                                    Sofa
-                                                </div>
-                                                <div className="justify-evenly text-medium mt-3">
-                                                    <div className="flex">
-                                                        <div>Adet</div>
-                                                        <div className="flex">
-                                                            <button>+</button>
-                                                            <button>-</button>
-                                                        </div>
-                                                    </div>
-                                                    <div className="mt-3"> 249 tl</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <Link to="/checkout">
-                                            <Button className="w-full" color="brown">Go to Checkout</Button>
-                                        </Link>
-
-                                    </div>
-                                )}
-                            </div>
+                            <CartItem/>
 
                             <UilMoon />
                             <UilSun className="sun hidden" />

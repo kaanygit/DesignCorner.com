@@ -6,5 +6,4 @@ export const getProducts=createSelector(
     [selectProduct],
     (productState) => productState?.products || []
 );
-console.log(selectProduct.state);
-console.log(getProducts);
+
