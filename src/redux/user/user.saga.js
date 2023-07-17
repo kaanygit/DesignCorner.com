@@ -1,9 +1,10 @@
-import { takeLatest, put, select, take } from 'redux-saga/effects';
+import { takeLatest, put } from 'redux-saga/effects';
 import { USER_TYPES } from './user.type';
+import { setToken } from './user.action';
 
-function* handleLogin(action){
+function* handleLoginSuccess(action){
     const {token}=action.payload;
-    
+
     yield put({type:'persist/REHYDRATE',payload:{token}});
 }
 
@@ -12,6 +13,6 @@ function* handleLogout(){
 }
 
 export default function* rootUserSaga(){
-    yield takeLatest(USER_TYPES.LOGIN_SUCCESS,handleLogin);
+    yield takeLatest(USER_TYPES.LOGIN_SUCCESS,handleLoginSuccess);
     yield takeLatest(USER_TYPES.LOGOUT,handleLogout);
 }

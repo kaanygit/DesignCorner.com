@@ -1,7 +1,9 @@
 import { USER_TYPES } from "./user.type";
 
 const initialState={
-    token:null
+    token:null,
+    isLoading:false,
+    error:null
 };
 
 const userReducer=(state=initialState,action)=>{

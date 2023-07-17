@@ -5,6 +5,8 @@ export const setToken=(token)=>({
     payload:token
 });
 
+
+
 export const removeToken=()=>({
     type:USER_TYPES.LOGOUT,
-})
+});

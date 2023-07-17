@@ -13,14 +13,7 @@ const Navigation=()=>{
     const [userMenuOpen,setUserMenuOpen]=useState(false);
     const dispatch=useDispatch();
     const token=useSelector(selectToken);
-    const [tokens,setTokens]=useState(null);
 
-    console.log(tokens);
-    useEffect(()=>{
-        if(token){
-            setTokens(token);
-        }
-    },[token])
 
     const handleMenuToggle=()=>{
         setMenuOpen(!isMenuOpen);
@@ -81,7 +74,7 @@ const Navigation=()=>{
                             <Link to="/contact" className="contact-section-nav-tab text-woodColor">Contact</Link>
                         </div>
                         <div className="nav-tab-third flex items-center justify-end space-x-4 text-xl">
-                            {tokens?(
+                            {token.token===null?(
                                 <>  
                                     <Link to="/authentication" className="authentication-section-nav-tab text-woodColor">Login</Link>
                                 </>
