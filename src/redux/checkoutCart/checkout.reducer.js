@@ -2,6 +2,7 @@ import{ CHECKOUT_ACTION_TYPES }from './checkout.type'
 
 const initialState={
     products:[],
+    isLoading:false
 };
 
 const productReducer=(state=initialState,action)=>{

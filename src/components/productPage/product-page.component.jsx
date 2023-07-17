@@ -5,7 +5,7 @@ import { DataContext } from "../../context/products.context";
 import { Button } from "@material-tailwind/react";
 import { useDispatch } from "react-redux";
 import {setProduct} from "../../redux/checkoutCart/checkout.action"
-
+import SpinnerComponent from '../spinner/spinner.component'
 
 
 
@@ -25,14 +25,12 @@ const ProductPage=()=>{
     };
     if (!products) {
         return (
-            <div className="flex items-center justify-center min-h-screen p-5 bg-gray-100 min-w-screen">
-                <div className="flex space-x-2 animate-pulse">
-                    <div className="w-3 h-3 bg-gray-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-gray-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-gray-500 rounded-full"></div>
+            <> 
+                <div className="w-screen h-screen">
+                    <SpinnerComponent/>
                 </div>
-            </div>
-            );
+            </>
+        )
       }
 
     return(

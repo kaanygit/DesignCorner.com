@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 const FooterSection=()=>{
     return(
         <>
-            <div className="w-full h-full p-16 flex bg-gray-900 text-white ">
+            <div className="w-full h-full p-16 flex bg-gray-900 text-white bottom-0">
                 <div className='w-full h-full'>
                     <div>
                         <span className="text-4xl font-bold">DesignCorner.com</span>

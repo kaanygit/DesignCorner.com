@@ -15,22 +15,20 @@ import { selectToken } from "./redux/user/user.selector";
 
 
 function App() {
-  const token=useSelector(selectToken);
-  console.log(token);
+  const token=useSelector(selectToken).token;
   return (
     <Routes>
       <Route path='/' element={<Navigation/>}>
-        <Route index element={<Home/>}/>
-        <Route path='products' element={<Products/>}/>
-        <Route path="products/:categoryName" element={<ProductCategoryPage/>}/>
-        <Route path="products/:categoryName/:productId" element={<ProductPage/>}/>
-        <Route path='contact' element={<Contact/>} />
-        <Route path='checkout' element={<Checkout/>} />
-        <Route path="*" element={<NotFound/>} />
-        <Route path="dashboard" element={token?<Navigate to="/authentication"/>:<Dashboard/>}/>
+          <Route path='products' element={<Products/>}/>
+          <Route path="products/:categoryName" element={<ProductCategoryPage/>}/>
+          <Route path="products/:categoryName/:productId" element={<ProductPage/>}/>
+          <Route path='contact' element={<Contact/>} />
+          <Route path='checkout' element={<Checkout/>} />
+          <Route path="*" element={<NotFound/>} />
+          <Route path="dashboard" element={token===null?<Navigate to="/authentication"/>:<Dashboard/>}/>
+          <Route index element={<Home/>}/>
       </Route>
-
-        <Route path="/authentication" element={token?<Authentication/>:<Navigate to="/dashboard"/>}>
+          <Route path="/authentication" element={token===null?<Authentication/>:<Navigate to="/dashboard"/>}>
           <Route path="forgotpassword" element={<ForgotPassword/>}/>
         </Route>
     </Routes>
