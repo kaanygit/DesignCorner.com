@@ -1,9 +1,9 @@
-import { Outlet } from "react-router-dom"
+import { Navigate, Outlet } from "react-router-dom"
 
 const Products=()=>{
     return(
         <>
-            <h1>Products</h1>
+            <Navigate to="/products/sofa"/>
             <Outlet/>
         </>
     )

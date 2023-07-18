@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Link, Outlet } from "react-router-dom"
 
 import { UilMoon,UilSun} from '@iconscout/react-unicons'
@@ -7,12 +7,20 @@ import { removeToken } from "../../redux/user/user.action"
 import products from "../../category.product.json"
 import { selectToken } from "../../redux/user/user.selector"
 import CartItem from '../../components/cart-item/cart-item.component'
+import SpinnerComponent from "../../components/spinner/spinner.component"
+import { selectUserData, setUserDetails } from "../../redux/user/userDetails"
+
 
 const Navigation=()=>{
     const [isMenuOpen,setMenuOpen]=useState(false);
     const [userMenuOpen,setUserMenuOpen]=useState(false);
+    const [userData,setUserData]=useState(null);
+    const userDetails=useSelector(selectUserData);
+    
+    
     const dispatch=useDispatch();
     const token=useSelector(selectToken);
+    const userDetay=useSelector(selectUserData)
 
 
     const handleMenuToggle=()=>{
@@ -23,10 +31,13 @@ const Navigation=()=>{
     };
     const signOutUser=()=>{
         dispatch(removeToken());
+        dispatch(setUserDetails(null))
         window.location.href=("/");
     };
+    console.log(userDetay);
 
-    
+
+
 
     
     return(
@@ -59,9 +70,9 @@ const Navigation=()=>{
                                             {products.map((product)=>(
                                                 <div key={product.key}>
                                                     <div className="asd pb-3">
-                                                        <Link to={`/products/${product.name}`}>
-                                                            <img className="imageUrl w-5/5 h-20" src={product.imgUrl} alt={product.name}/>
-                                                            <span className="assdsd text-center ">{product.name}</span>
+                                                        <Link to={`/products/${product.name}`} >
+                                                            <img className="imageUrl w-5/5 h-20" onClick={()=>(setMenuOpen(!isMenuOpen))} src={product.imgUrl} alt={product.name}/>
+                                                            <span className="assdsd text-center " onClick={()=>(setMenuOpen(!isMenuOpen))}>{product.name}</span>
                                                         </Link>
                                                     </div>
                                                 </div>
@@ -81,11 +92,11 @@ const Navigation=()=>{
                             ):(
                                 <>  
                                     <div className="relative inline-block">
-                                        <span className="text-woodColor cursor-pointer" onClick={handleUserMenuToogle}>Test-User</span>
+                                        <span className="text-woodColor cursor-pointer" onClick={handleUserMenuToogle}>{userDetails===null?<SpinnerComponent/>:userDetails.name + userDetails.surname}</span>
                                         {userMenuOpen &&(
-                                            <div className="asd flex absolute bg-gray-500 z-10 right-0 mt-2 w-40 rounded-xl shadow-xl border">
+                                            <div className="asd flex absolute bg-gray-100 z-10 right-0 mt-2 w-40 rounded-xl shadow-xl border">
                                                 <div className="p-5">
-                                                    <Link  to="/dashboard">Dashboard</Link>
+                                                    <Link  to="/dashboard" onClick={()=>setUserMenuOpen(!userMenuOpen)}>Dashboard</Link>
                                                     <button className="mt-2" onClick={signOutUser}>Sign Out</button>
                                                 </div>
                                             </div>
