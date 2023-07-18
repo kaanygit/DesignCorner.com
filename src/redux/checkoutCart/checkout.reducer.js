@@ -14,7 +14,7 @@ const productReducer=(state=initialState,action)=>{
               if (existingProductIndex !== -1) {
                     const updatedProducts = [...state.products];
                     const existingProduct = updatedProducts[existingProductIndex];
-                    existingProduct.count += 1/2;
+                    existingProduct.count += 1;
                     return {
                     ...state,
                     products: updatedProducts,

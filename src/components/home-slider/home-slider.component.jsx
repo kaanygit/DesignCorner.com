@@ -2,6 +2,7 @@ import { UilAngleLeft,UilAngleRight,UilArrowRight  } from '@iconscout/react-unic
 import { useContext, useEffect, useState } from 'react';
 import { Transition } from '@headlessui/react';
 import { DataContext } from '../../context/products.context';
+import { Link } from 'react-router-dom';
 
 
 
@@ -47,11 +48,13 @@ const HomeSlider=()=>{
                             sliderIndex===productSlider.key ? (                            
                                 <div key={productSlider._id} className='flex pb-32 pr-32 pl-32 pt-20 items-center w-full h-full relative'>
                                     <Transition show={showPageTransition} enter='transition-opacity duration-1000' enterFrom='opacity-0' enterTo='opacity-100'>
-                                        <img className='w-full h-full rounded-3xl' src={productSlider.imageUrl} alt={productSlider.name}/>
+                                        <Link to={`/products/${productSlider.name}/${productSlider.key}`}>
+                                            <img className='w-full h-full rounded-3xl' src={productSlider.imageUrl} alt={productSlider.name}/>
+                                        </Link>
                                     </Transition>
                                         <div className='absolute w-48 h-36 top-20 right-32 p-4 rounded-3xl'>
                                             <Transition show={showPageTransition} enter='transition-opacity duration-1000' enterFrom='opacity-0' enterTo='opacity-100'>
-                                                <div className='font-bold text-3xl mb-2 border-b border-black text-black'>{productSlider.name}</div>
+                                                <div className='font-bold text-4xl mb-2 border-b border-black text-black'>{productSlider.name}</div>
                                             </Transition>
                                             {productSlider.discountRate!==0?(
                                                 <Transition show={showPageTransition} enter='transition-opacity duration-1000' enterFrom='opacity-0' enterTo='opacity-100'>

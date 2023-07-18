@@ -1,13 +1,16 @@
 import { Transition } from "@headlessui/react";
 import { useContext, useEffect } from "react";
 import { useState } from "react";
-import Foto from '../../assets/woodchair.jpg'
 import {UilShoppingCartAlt} from '@iconscout/react-unicons'
 import { DataContext } from "../../context/products.context";
+import { setProduct } from "../../redux/checkoutCart/checkout.action";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 const HomePageSectionContent=()=>{
     const [showSectionContent,setShowSectionContent]=useState(false);
-    const PRODUCT=useContext(DataContext);
+    const products=useContext(DataContext);
+    const dispatch=useDispatch();
     useEffect(()=>{
         const handleScroll=()=>{
             const scrollPosition =window.scrollY;
@@ -23,6 +26,23 @@ const HomePageSectionContent=()=>{
             window.removeEventListener('scroll',handleScroll)
         }
     },[])
+    // const selectProducId=(productId)=>{
+    //     const product = products.find((product) => product._id === productId);
+    //     if (product) {
+    //         dispatch(setProduct(product));
+    //       }
+    // }
+    const selectProducId=(productId)=>{
+        const productSet=()=>{
+            products.map((id)=>{
+                if(id._id===productId){
+                    dispatch(setProduct(id));
+                }
+            })
+        }
+        productSet();
+        console.log(products);
+    } 
     return(
         <>
             <div className="w-full h-full p-16 flex">
@@ -33,16 +53,20 @@ const HomePageSectionContent=()=>{
                         </div>
                         <div className="w-full border-b-8 border-black mt-3"></div>
                         <div>
-                            <div className="grid grid-cols-5 gap-6 mt-5 w-full">
-                                {PRODUCT.map((products)=>(
-                                    <div className="relative" key={products.key}>
+                            <div className="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-2 gap-6 mt-5 w-full">
+                                {products.map((product)=>(
+                                    <div className="relative" key={product.key}>
                                         <div className="w-full h-full">
                                             <div className="groupImage transition-transfrom transform-gpu  overflow-hidden">
-                                                <img className="w-64 h-48  hover:scale-110 hover:duration-500 " src={products.imageUrl} alt={products.name}/>
+                                                <Link to={`/products/${product.name}/${product.key}`}>
+                                                    <img className="w-64 h-48  hover:scale-110 hover:duration-500 " src={product.imageUrl} alt={product.name}/>
+                                                </Link>
                                             </div>
                                             <div className="items-center flex justify-between w-full bg-gray-100 p-2">
-                                                <span>{products.name}</span>
-                                                <button className="block pr-3"><UilShoppingCartAlt /></button>
+                                                <Link to={`/products/${product.name}/${product.key}`}>
+                                                    <span>{product.name}</span>
+                                                </Link>
+                                                <button className="block pr-3" onClick={()=>selectProducId(product._id)}><UilShoppingCartAlt /></button>
                                             </div>
                                         </div>
                                     </div>

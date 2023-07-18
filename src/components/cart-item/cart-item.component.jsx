@@ -1,4 +1,3 @@
-import { Button, Spinner } from '@material-tailwind/react';
 import { useEffect, useState } from 'react';
 import {GrShop} from 'react-icons/gr'
 import {AiOutlinePlus,AiOutlineMinus} from 'react-icons/ai'
@@ -78,7 +77,7 @@ const CartItem=()=>{
                             )}
                         </div>
                         <Link to="/checkout">
-                            <button className="w-full rounded-none bg-brown-500 text-white font-medium text-2xl rounded-b-xl" >Go to Checkout</button>
+                            <button className="w-full rounded-none bg-brown-500 text-white font-medium text-2xl rounded-b-xl" onClick={()=>setCheckoutMenuOpen(!checkoutMenuOpen)}>Go to Checkout</button>
                         </Link>
 
                     </div>

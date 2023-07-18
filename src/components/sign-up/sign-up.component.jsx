@@ -20,6 +20,10 @@ const SignUp=()=>{
     const [formValue,setFormValue]=useState(defaultForms);
     const [mongoseForm,setMongoseForm]=useState(defaultForms);
     const dispatch=useDispatch();
+    const upperCase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+    const  privateCharacters = ['!', '@', '#', '$', '%', '&', '*', '(', ')', '-', '+', '=', '[', ']', '{', '}', '?', '/', '\\', '<', '>', '|', ':', ';', ',', '.'];
+    const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
 
 
     const {name,surname,email,password,confirmPassword}=formValue;
@@ -49,8 +53,25 @@ const SignUp=()=>{
     )
     const handleSubmit=async(e)=>{
         e.preventDefault();
-        if(password!==confirmPassword){
-            alert("Passwords are not equal");
+        let upper=false;
+        let numbersa=false;
+        let priveate=false;
+        password.split('').forEach((pass)=>{
+            if(upperCase.includes(pass)){
+                upper=true;
+            }else if(numbers.includes(pass)){
+                numbersa=true;
+            }else if(privateCharacters.includes(pass)){
+                priveate=true;
+            }
+        });
+        console.log(upper,numbersa,priveate);
+
+        if(password!==confirmPassword && password.length>=8 ){
+            toast.error("Passwords are not equal");
+            return;
+        }else if(upper===true && numbersa===true && priveate===true){
+            toast.error("Please follow the password creation rules")
             return;
         }
         try {
@@ -60,7 +81,6 @@ const SignUp=()=>{
                 axios.post('http://localhost:5000/signin',{email:formValue.email,password:formValue.password}).then((responseSignIn)=>{
                     const token=responseSignIn.data.token;
                     dispatch(setToken(token));                    
-                    window.location.href='/';
                 }).catch((error)=>{
                     toast.error(error.responseSignIn.data.error);
                 })

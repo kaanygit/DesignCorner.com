@@ -72,6 +72,7 @@ app.post('/signin',async(req,res)=>{
         res.json({ token });
 
     } catch (error) {
+        console.error('Kullanıcı girişi sırasında bir hata oluştu:', error);
         res.status(500).json({ error: 'Kullanıcı girişi sırasında bir hata oluştu.' });
     }
 });
@@ -94,8 +95,21 @@ function authenticateToken(req, res, next) {
     });
   }
 
-app.get('/protected', authenticateToken, (req, res) => {
-res.json({ message: 'Korumalı bir rotada geziniyorsunuz.' });
+app.get('/user', authenticateToken, async (req, res) => {
+    try{
+        const userId=req.userId;
+
+        //kullanıcı veritabanı alma
+        const users=await User.findById(userId);
+
+        if(!users){
+            return res.status(404).json({error:'kullanıcı bulunamadı'});
+        }
+        res.status(200).json(users);
+    }catch(error){
+        console.error(' Kullanıcı verisi alma hatası: : ',error)
+        res.status(500).json({error:"sunucu hatası"});
+    }
 });
   
 

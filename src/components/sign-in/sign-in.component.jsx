@@ -29,17 +29,18 @@ const SignIn=()=>{
         e.preventDefault();
         try {
             setFormData(formValue);
-            axios.post('http://localhost:5000/signin',formData).then((response)=>{
+            axios.post('http://localhost:5000/signin',formValue).then((response)=>{
                 console.log(response.data);
                 const token=response.data.token;
                 dispatch(setToken(token));
-                window.location.href='/';
             }).catch((error)=>{
                 toast.error(error.response.data.error);
+                toast.error(error.message);
+
             })
             resetDefaultForms();
         } catch (error) {
-            toast.log("Error !! : ",error);
+            toast.error(error.response.data.error);
         }
     };
     console.log(formData);
