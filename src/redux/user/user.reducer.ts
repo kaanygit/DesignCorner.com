@@ -1,12 +1,25 @@
 import { USER_TYPES } from "./user.type";
 
-const initialState={
+interface initialStateInterface {
+    token: string |null;
+    isLoading:boolean;
+    error:Error | null;
+};
+
+const initialState:initialStateInterface={
     token:null,
     isLoading:false,
     error:null
-};
+}
 
-const userReducer=(state=initialState,action)=>{
+interface UserAction{
+    type:string;
+    payload?:any;
+}
+
+
+
+const userReducer=(state:initialStateInterface=initialState,action:UserAction)=>{
     switch(action.type){
         case USER_TYPES.LOGIN_SUCCESS:
             return{

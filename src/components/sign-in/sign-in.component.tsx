@@ -1,31 +1,36 @@
 import { Button, Input } from "@material-tailwind/react";
 import axios from "axios";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import {setToken} from "../../redux/user/user.action"
 
-const defaultSignForm={
+interface defaultSignFormInterfaceTS{
+    email:string;
+    password:string
+}
+
+const defaultSignForm:defaultSignFormInterfaceTS={
     "email":"",
     "password":""
 }
 
 const SignIn=()=>{
-    const [formData,setFormData]=useState(defaultSignForm);
-    const [formValue,setFormValue]=useState(defaultSignForm);
+    const [formData,setFormData]=useState<defaultSignFormInterfaceTS>(defaultSignForm);
+    const [formValue,setFormValue]=useState<defaultSignFormInterfaceTS>(defaultSignForm);
     const dispatch=useDispatch();
     const resetDefaultForms=()=>{setFormValue(defaultSignForm)};
     
     
     const {email,password}=formValue;
     
-    const handleChange=(e)=>{
+    const handleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
         const {name,value}=e.target;
         setFormValue({...formValue,[name]:value});
     };
     console.log(formValue);
-    const handleSubmit=(e)=>{
+    const handleSubmit=(e:React.ChangeEvent<HTMLFormElement>)=>{
         e.preventDefault();
         try {
             setFormData(formValue);
@@ -33,14 +38,23 @@ const SignIn=()=>{
                 console.log(response.data);
                 const token=response.data.token;
                 dispatch(setToken(token));
-            }).catch((error)=>{
-                toast.error(error.response.data.error);
-                toast.error(error.message);
+            }).catch((error:unknown)=>{
+                if(axios.isAxiosError(error)){
+                    if(error.response?.data.error){
+                        toast.error(error.response.data.error);
+                    }else{
+                        toast.error(error.message);
+                    }
+                }
 
             })
             resetDefaultForms();
-        } catch (error) {
-            toast.error(error.response.data.error);
+        } catch (error:unknown){
+            if(axios.isAxiosError(error)){
+                if(error.response?.data.error){
+                    toast.error(error.response.data.error);
+                }
+            }
         }
     };
     console.log(formData);

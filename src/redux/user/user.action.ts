@@ -1,6 +1,10 @@
 import { USER_TYPES } from "./user.type";
 
-export const setToken=(token)=>({
+interface initialStateUserAction{
+    token:string | null
+}
+
+export const setToken=(token:initialStateUserAction)=>({
     type:USER_TYPES.LOGIN_SUCCESS,
     payload:token
 });

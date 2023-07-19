@@ -1,11 +1,15 @@
-import{ CHECKOUT_ACTION_TYPES }from './checkout.type'
+import{ CHECKOUT_ACTION_TYPES,ProductDataCheckout,DecreaseProductAction ,IncreaseProductAction ,DeleteProductAction,SetProductAction }from './checkout.type'
 
-const initialState={
+interface initialStateInterfaceTS{
+    products:ProductDataCheckout[];
+    isLoading:boolean;
+};
+const initialState:initialStateInterfaceTS={
     products:[],
     isLoading:false
 };
 
-const productReducer=(state=initialState,action)=>{
+const productReducer=(state=initialState,action:SetProductAction|DeleteProductAction|DecreaseProductAction|IncreaseProductAction)=>{
     switch(action.type){
         case CHECKOUT_ACTION_TYPES.SET_PRODUCT:
             const existingProductIndex = state.products.findIndex(

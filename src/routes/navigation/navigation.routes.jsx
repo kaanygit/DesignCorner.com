@@ -8,13 +8,13 @@ import products from "../../category.product.json"
 import { selectToken } from "../../redux/user/user.selector"
 import CartItem from '../../components/cart-item/cart-item.component'
 import SpinnerComponent from "../../components/spinner/spinner.component"
-import { selectUserData, setUserDetails } from "../../redux/user/userDetails"
+import { selectUserData } from "../../redux/user-details/user.details.selector"
+import { setUserDetails } from "../../redux/user-details/user.details.action"
 
 
 const Navigation=()=>{
     const [isMenuOpen,setMenuOpen]=useState(false);
     const [userMenuOpen,setUserMenuOpen]=useState(false);
-    const [userData,setUserData]=useState(null);
     const userDetails=useSelector(selectUserData);
     
     
@@ -92,7 +92,7 @@ const Navigation=()=>{
                             ):(
                                 <>  
                                     <div className="relative inline-block">
-                                        <span className="text-woodColor cursor-pointer" onClick={handleUserMenuToogle}>{userDetails===null?<SpinnerComponent/>:userDetails.name + userDetails.surname}</span>
+                                        <span className="text-woodColor cursor-pointer" onClick={handleUserMenuToogle}>{userDetails===null?<SpinnerComponent/>:userDetails.name +" "+ userDetails.surname}</span>
                                         {userMenuOpen &&(
                                             <div className="asd flex absolute bg-gray-100 z-10 right-0 mt-2 w-40 rounded-xl shadow-xl border">
                                                 <div className="p-5">

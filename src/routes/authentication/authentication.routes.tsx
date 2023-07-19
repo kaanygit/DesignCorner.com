@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom"
 import SignIn from '../../components/sign-in/sign-in.component'
 import SignUp from '../../components/sign-up/sign-up.component'
-import './authentication.styles.css'
 import {ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './authentication.styles.css'
 
 const Authentication=()=>{
     return(
