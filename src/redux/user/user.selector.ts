@@ -1,6 +1,10 @@
 import { createSelector } from "reselect";
 
-const getToken=(state)=>state.token;
+interface initialState{
+    token:string | null;
+}
+
+const getToken=(state:initialState)=>state.token;
 
 export const selectToken=createSelector(
     getToken,

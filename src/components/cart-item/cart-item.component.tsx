@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState ,FC} from 'react';
 import {GrShop} from 'react-icons/gr'
 import {AiOutlinePlus,AiOutlineMinus} from 'react-icons/ai'
 
@@ -9,11 +9,24 @@ import SpinnerComponent from '../spinner/spinner.component'
 import { decreaseProduct, increaseProduct } from '../../redux/checkoutCart/checkout.action';
 
 
-const CartItem=()=>{
+export interface productData{
+    count:number;
+    discountRate:number;
+    imageUrl:string;
+    key:number;
+    name:string;
+    price:number;
+    productInformation:string;
+    _v:number;
+    _id:string;
+}
+
+
+const CartItem:FC=()=>{
     const [checkoutMenuOpen,setCheckoutMenuOpen]=useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const dispatch=useDispatch();
-    const products=useSelector(getProducts);
+    const products:productData[]=useSelector(getProducts);
     console.log(products);
     useEffect(()=>{
         if(products){
@@ -26,14 +39,14 @@ const CartItem=()=>{
     const checkoutOpen=()=>{
         setCheckoutMenuOpen(!checkoutMenuOpen);
     };
-    const IncreaseProduct=(productId)=>{
+    const IncreaseProduct=(productId:string)=>{
         dispatch(increaseProduct(productId));
     }
-    const DecreaseProduct=(productId)=>{
+    const DecreaseProduct=(productId:string)=>{
         dispatch(decreaseProduct(productId));
     }
     return(
-        <>
+        <Fragment>
             <div className="relative">
                 <button onClick={checkoutOpen}>
                     <GrShop/>
@@ -84,7 +97,7 @@ const CartItem=()=>{
                 )}
             </div>
 
-        </>
+        </Fragment>
     )
 }
 

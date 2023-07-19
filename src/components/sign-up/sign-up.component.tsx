@@ -1,12 +1,20 @@
 import { Button, Input, Typography } from "@material-tailwind/react"
 import axios from "axios";
-import { useState } from "react"
+import React, { useState } from "react"
 import { toast } from "react-toastify";
 import {setToken} from "../../redux/user/user.action"
 import { useDispatch } from "react-redux";
 
+interface defaultFormInterfaceTS{
+    name:string;
+    surname:string;
+    email:string;
+    password:string;
+    confirmPassword:string;
+}
 
-const defaultForms={
+
+const defaultForms:defaultFormInterfaceTS={
     name:"",
     surname:"",
     email:"",
@@ -17,8 +25,8 @@ const defaultForms={
 
 const SignUp=()=>{
     const [seePassword,setSeePassword]=useState(false);
-    const [formValue,setFormValue]=useState(defaultForms);
-    const [mongoseForm,setMongoseForm]=useState(defaultForms);
+    const [formValue,setFormValue]=useState<defaultFormInterfaceTS>(defaultForms);
+    const [mongoseForm,setMongoseForm]=useState<defaultFormInterfaceTS>(defaultForms);
     const dispatch=useDispatch();
     const upperCase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     const  privateCharacters = ['!', '@', '#', '$', '%', '&', '*', '(', ')', '-', '+', '=', '[', ']', '{', '}', '?', '/', '\\', '<', '>', '|', ':', ';', ',', '.'];
@@ -31,7 +39,7 @@ const SignUp=()=>{
     
     // e.preventDefault();
 
-    const handleChange = (e) => {
+    const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormValue({ ...formValue, [name]: value });
     };
@@ -51,11 +59,11 @@ const SignUp=()=>{
         </svg>
 
     )
-    const handleSubmit=async(e)=>{
+    const handleSubmit=async(e:React.ChangeEvent<HTMLFormElement>)=>{
         e.preventDefault();
-        let upper=false;
-        let numbersa=false;
-        let priveate=false;
+        let upper:Boolean=false;
+        let numbersa:Boolean=false;
+        let priveate:Boolean=false;
         password.split('').forEach((pass)=>{
             if(upperCase.includes(pass)){
                 upper=true;
@@ -84,16 +92,36 @@ const SignUp=()=>{
                 }).catch((error)=>{
                     toast.error(error.responseSignIn.data.error);
                 })
-            }).catch((error)=>{
-                if (error.responseSignUp && error.responseSignUp.data && error.responseSignUp.data.error === 'Email already exists.') {
-                    toast.error('Email already exists.'); // Hata mesajını göster
-                  } else {
-                    toast.error('An error occurred while creating the user.'); // Diğer hata durumlarını ele al
-                  }
+            }).catch((error:unknown)=>{
+                if(axios.isAxiosError(error)){
+                    // if (error.responseSignUp && error.responseSignUp.data && error.responseSignUp.data.error === 'Email already exists.') {
+                    //     toast.error('Email already exists.'); // Hata mesajını göster
+                    //   } else {
+                    //     toast.error('An error occurred while creating the user.'); // Diğer hata durumlarını ele al
+                    //   }
+                    if (axios.isAxiosError(error)) {
+                        if (error.response && error.response.data && error.response.data.error === 'Email already exists.') {
+                          toast.error('Email already exists.');
+                        } else {
+                          toast.error('An error occurred while creating the user.');
+                        }
+                      } else {
+                        toast.error("An error occurred while creating the user.");
+                      }
+                }else{
+                    toast.error("An error occurred while creating the user.");
+                }
             })
             resetDefaultForms();
-        } catch (error) {
-            toast.log("Error : ",error);
+        } catch (error:unknown){
+            if(axios.isAxiosError(error)){
+                if(error.response){
+                    toast.error("Error: " + error.response.data.error);
+                }
+            }else{
+                toast.error("An error occurred while creating the user.");
+            }
+
         }
     }
     console.log(formValue);

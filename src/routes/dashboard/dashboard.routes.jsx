@@ -2,8 +2,10 @@ import { Avatar, Button, Input } from "@material-tailwind/react";
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import {selectToken} from '../../redux/user/user.selector';
+import {selectUserData} from '../../redux/user-details/user.details.selector';
+import {setUserDetails} from '../../redux/user-details/user.details.action'
 import axios from "axios";
-import {selectUserData, setUserDetails } from "../../redux/user/userDetails";
+
 const defaultPassword={
     oldPassword:"",
     newPassword:"",
