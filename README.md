@@ -1,5 +1,5 @@
 
-# DesignCorner.com  v1
+# DesignCorner.com  v1.0
 
 DesignCorner.com is an online platform that offers users various furniture options. Its goal is to provide customers with the ability to decorate their homes according to their desired style and offer high-quality furniture products.
 
