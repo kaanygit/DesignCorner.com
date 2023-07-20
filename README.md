@@ -29,3 +29,6 @@ DesignCorner.com utilizes the following technologies:
 
 
 ## Contributing
+
+DesignCorner.com is a furniture platform that I created to improve myself. I am waiting for support suggestions for the project.
+
