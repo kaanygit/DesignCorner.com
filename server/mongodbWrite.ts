@@ -8,7 +8,7 @@ const connectionURL = process.env.MONGO_URI;
 
 mongoose.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    console.log('MongoDB\'ye bağlantı başarılı!');
+    console.log('MongoDB\'ye bağlanti başarili!');
 
     const productSchema= new mongoose.Schema({
         key:Number,

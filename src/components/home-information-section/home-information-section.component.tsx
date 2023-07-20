@@ -1,8 +1,9 @@
+import { FC } from 'react'
 import {AiOutlineSafety} from 'react-icons/ai'
 import {BsCreditCard2Front} from 'react-icons/bs'
 import {FaExchangeAlt} from 'react-icons/fa'
 
-const HomeInformationSection=()=>{
+const HomeInformationSection:FC=()=>{
     return(
         <>
             <div className="w-full h-screen justify-center items-center flex ">

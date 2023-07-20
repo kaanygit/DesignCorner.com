@@ -2,10 +2,10 @@ import { useDispatch, useSelector } from "react-redux"
 import { getProducts } from "../../redux/checkoutCart/checkout.selector";
 import {AiOutlineClose,AiOutlinePlus,AiOutlineMinus} from 'react-icons/ai'
 import { decreaseProduct, increaseProduct, removeProduct } from "../../redux/checkoutCart/checkout.action";
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useState } from "react";
 import SpinnerComponent from "../spinner/spinner.component";
-const CheckoutContext=()=>{
+const CheckoutContext:FC=()=>{
     const products=useSelector(getProducts);
     const [isLoading, setIsLoading] = useState(true);
     const dispatch=useDispatch();
@@ -19,13 +19,13 @@ const CheckoutContext=()=>{
         }
     },[products])
 
-    const handleCountIncrement=(productId)=>{
+    const handleCountIncrement=(productId:string)=>{
         dispatch(increaseProduct(productId))
     }
-    const handleCountDecrement=(productId)=>{
+    const handleCountDecrement=(productId:string)=>{
         dispatch(decreaseProduct(productId))
     }
-    const handleRemoveProduct=(productId)=>{
+    const handleRemoveProduct=(productId:string)=>{
         dispatch(removeProduct(productId));
     }
 

@@ -7,28 +7,28 @@ export enum USER_TYPE_DETAILS{
 };  
 
 export interface userDetailsInterface{
-    email:string;
-    name:string;
-    password:string;
-    surname:string;
-    _v:number;
-    _id:string;
+    readonly email:string;
+    readonly name:string;
+    readonly password:string;
+    readonly surname:string;
+    readonly _v:number;
+    readonly _id:string;
 };
 
+
+export interface userDetailsSelectorInterfaceTS{
+    userDetails:{
+        data:userDetailsInterface[]|null;
+    };
+};
 export interface userDetailsReducerInterfaceTS{
     type:string;
     payload?:any;  
 };
 
-export interface userDetailsSelectorInterfaceTS{
-    userDetails:{
-        data:userDetailsInterface[];
-    };
-};
-
 export interface SetUserDetailsAction{
     type :typeof USER_TYPE_DETAILS.SET_USER_DETAILS;
-    payload:userDetailsInterface
+    payload:userDetailsInterface|{}
 }
 
 export interface FetchUserDataSuccessAction{

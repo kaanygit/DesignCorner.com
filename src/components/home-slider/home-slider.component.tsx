@@ -1,15 +1,22 @@
-import { UilAngleLeft,UilAngleRight,UilArrowRight  } from '@iconscout/react-unicons'
-import { useContext, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Transition } from '@headlessui/react';
-import { DataContext } from '../../context/products.context';
 import { Link } from 'react-router-dom';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import RootState from '../../redux/root-reducer';
+import {AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
+import { BsArrowRight } from 'react-icons/bs';
 
 
+const HomeSlider:FC=()=>{
+    const [showPageTransition,setShowPageTransition]=useState<boolean>(false);
+    const [sliderIndex,setSliderIndex]=useState<number>(1);
+    // const HomeSliderList: ProductData[] = useSelector(selectProducts);
+    const { products, isLoading, error } = useSelector((state: RootState) => state.productsData);
+    const HomeSliderList=products;
+    console.log(isLoading);
+    console.log(error);
 
-const HomeSlider=()=>{
-    const [showPageTransition,setShowPageTransition]=useState(false);
-    const [sliderIndex,setSliderIndex]=useState(1);
-    const HomeSliderList=useContext(DataContext);
 
 
     const sliderListLenght=HomeSliderList.length;
@@ -41,7 +48,7 @@ const HomeSlider=()=>{
             <div className='homeSliderDiv flex w-full h-full  z-0 '>
                 <div className='grid grid-cols-5 gap-4 w-full h-full '>
                     <div className='incrementDicrementButton h-screen items-center justify-around flex'>
-                        <button onClick={sliderBack}><UilAngleLeft/></button>
+                        <button onClick={sliderBack}><AiOutlineArrowLeft/></button>
                     </div>
                     <div className='flex items-center justify-center w-full h-full col-span-3 '>
                         {HomeSliderList.map((productSlider)=>(
@@ -60,7 +67,7 @@ const HomeSlider=()=>{
                                                 <Transition show={showPageTransition} enter='transition-opacity duration-1000' enterFrom='opacity-0' enterTo='opacity-100'>
                                                     <div className='flex'>
                                                         <div className="line-through">{productSlider.price}₺</div>
-                                                        <div><UilArrowRight/></div>
+                                                        <div className='text-center pl-2 pr-2 justify-center h-full'><BsArrowRight/></div>
                                                         <div>{(productSlider.price*productSlider.discountRate)/100}₺</div>
                                                     </div>
                                                 </Transition>
@@ -78,7 +85,7 @@ const HomeSlider=()=>{
                         ))}
                     </div>
                     <div className='incrementDicrementButton z-10 w-full h-screen items-center justify-around flex'>
-                        <button onClick={sliderFoward}><UilAngleRight/></button>
+                        <button onClick={sliderFoward}><AiOutlineArrowRight/></button>
                     </div>
                 </div>
             </div>

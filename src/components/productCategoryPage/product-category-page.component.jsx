@@ -1,11 +1,11 @@
-import { useContext } from "react"
-import { DataContext } from "../../context/products.context"
+import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import productCategory from "../../category.product.json"
 
 const ProductCategoryPage=({productId})=>{
     const { categoryName } = useParams();
-    const products=useContext(DataContext);
+    const {products}= useSelector((state)=>state.productsData);
+
     const category=productCategory.find(category=>category.name===parseInt(categoryName));
 
     const capitalizeString=(str)=>{
@@ -16,7 +16,7 @@ const ProductCategoryPage=({productId})=>{
     console.log(productIndex);
     return(
         <>
-            <div className="w-full p-16  flex font-montserrat-alternates">
+            <div className="w-full p-16 justify-center flex items-center font-montserrat-alternates">
                 <div className="w-full h-full">  
                     <div className="justify-start">
                         <span className="text-4xl font-bold  border-b-2 border-black ">{categoryName.toUpperCase()}</span>

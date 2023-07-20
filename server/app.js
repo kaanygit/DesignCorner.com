@@ -1,3 +1,4 @@
+
 const mongoose=require('mongoose');
 const express=require('express');
 const bcrypt=require('bcrypt');
@@ -23,9 +24,9 @@ mongoose.connect(process.env.MONGO_URI,{
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(()=>{
-    console.log('MongoDB bağlantı başarılı');
+    console.log('MongoDB bağlanti başarili');
 }).catch((err)=>{
-    console.log('MongoDB bağlantı başarısız : ',err);
+    console.log('MongoDB bağlanti başarisiz : ',err);
 });
 
 const userSchema=new mongoose.Schema({
@@ -46,9 +47,9 @@ app.post('/signup',async(req,res)=>{
         const user = new User({name, surname ,email, password: hashedPassword});
         await user.save();
         
-        res.status(201).json({message:'Kullanıcı başarıyla oluşturuldu.'});
+        res.status(201).json({message:'Kullanici başariyla oluşturuldu.'});
     }catch(error){
-        res.status(500).json({ error: 'Kullanıcı oluşturulurken bir hata oluştu.' });
+        res.status(500).json({ error: 'Kullanici oluşturulurken bir hata oluştu.' });
         console.log(error);
     }
 });
@@ -60,7 +61,7 @@ app.post('/signin',async(req,res)=>{
         const user=await User.findOne({email});
         
         if(!user){
-            return res.status(404).json({ error: 'Kullanıcı bulunamadı.' });
+            return res.status(404).json({ error: 'Kullanici bulunamadı.' });
         }
 
         const passwordMatch = await bcrypt.compare(password, user.password);
@@ -72,8 +73,8 @@ app.post('/signin',async(req,res)=>{
         res.json({ token });
 
     } catch (error) {
-        console.error('Kullanıcı girişi sırasında bir hata oluştu:', error);
-        res.status(500).json({ error: 'Kullanıcı girişi sırasında bir hata oluştu.' });
+        console.error('Kullanici girişi sirasinda bir hata oluştu:', error);
+        res.status(500).json({ error: 'Kullanici girişi sirasinda bir hata oluştu.' });
     }
 });
 
@@ -103,12 +104,12 @@ app.get('/user', authenticateToken, async (req, res) => {
         const users=await User.findById(userId);
 
         if(!users){
-            return res.status(404).json({error:'kullanıcı bulunamadı'});
+            return res.status(404).json({error:'kullanici bulunamadı'});
         }
         res.status(200).json(users);
     }catch(error){
-        console.error(' Kullanıcı verisi alma hatası: : ',error)
-        res.status(500).json({error:"sunucu hatası"});
+        console.error(' Kullanici verisi alma hatasi: : ',error)
+        res.status(500).json({error:"sunucu hatasi"});
     }
 });
   

@@ -3,7 +3,6 @@ import { getProducts } from "../../redux/checkoutCart/checkout.selector";
 import CheckoutContext from '../../components/checkout-context/checkout-context.component'
 import { useEffect } from "react";
 const Checkout=()=>{
-    // const dispatch=useDispatch();
     const products=useSelector(getProducts);
     const totalCount=products.reduce((sum,product)=>
         product.discountRate>0?sum+(((product.price*product.discountRate)/100)*product.count):sum+(product.price*product.count),

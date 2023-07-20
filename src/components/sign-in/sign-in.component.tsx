@@ -72,7 +72,7 @@ const SignIn=()=>{
                     <Button fullWidth type="submit">Sign In</Button>
                 </form>
                 <div className="text-blue-400 mt-2">
-                    <Link to='/forgotpassword'>Forgot Password?</Link>
+                    <Link to='/authentication/forgotpassword'>Forgot Password?</Link>
                 </div>
             </div>
 

@@ -1,20 +1,24 @@
+import React, { FC } from  "react";
 import { Transition } from "@headlessui/react";
-import { useContext, useEffect } from "react";
-import { useState } from "react";
-import {UilShoppingCartAlt} from '@iconscout/react-unicons'
-import { DataContext } from "../../context/products.context";
+import {useEffect } from "react";
+import { useState} from "react";
+import {GrShop} from 'react-icons/gr'
 import { setProduct } from "../../redux/checkoutCart/checkout.action";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import RootState from "../../redux/root-reducer";
 
-const HomePageSectionContent=()=>{
-    const [showSectionContent,setShowSectionContent]=useState(false);
-    const products=useContext(DataContext);
+const HomePageSectionContent:FC=()=>{
+    const [showSectionContent,setShowSectionContent]=useState<boolean>(false);
+    const { products, isLoading, error } = useSelector((state: RootState) => state.productsData);
+
+    console.log(products);
+
     const dispatch=useDispatch();
     useEffect(()=>{
         const handleScroll=()=>{
-            const scrollPosition =window.scrollY;
-            const windowHeight=window.innerHeight;
+            const scrollPosition:number =window.scrollY;
+            const windowHeight:number=window.innerHeight;
     
             if(scrollPosition >windowHeight*0.6){
                 setShowSectionContent(true);
@@ -26,13 +30,7 @@ const HomePageSectionContent=()=>{
             window.removeEventListener('scroll',handleScroll)
         }
     },[])
-    // const selectProducId=(productId)=>{
-    //     const product = products.find((product) => product._id === productId);
-    //     if (product) {
-    //         dispatch(setProduct(product));
-    //       }
-    // }
-    const selectProducId=(productId)=>{
+    const selectProducId=(productId:string)=>{
         const productSet=()=>{
             products.map((id)=>{
                 if(id._id===productId){
@@ -41,11 +39,11 @@ const HomePageSectionContent=()=>{
             })
         }
         productSet();
-        console.log(products);
+       console.log(products);
     } 
     return(
         <>
-            <div className="w-full h-full p-16 flex">
+            <div className="w-full h-screen pt-10 pb-10 pl-3 pr-3 justify-center items-center flex">
                 <Transition show={showSectionContent} enter="transition-opacity duration-500" enterFrom="opacity-0 transform translate-x-full" enterTo="opacity-100 transform translate-x-0">
                     <div>
                         <div>
@@ -53,20 +51,20 @@ const HomePageSectionContent=()=>{
                         </div>
                         <div className="w-full border-b-8 border-black mt-3"></div>
                         <div>
-                            <div className="grid lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-2 gap-6 mt-5 w-full">
+                            <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-6 mt-5 w-full">
                                 {products.map((product)=>(
                                     <div className="relative" key={product.key}>
                                         <div className="w-full h-full">
                                             <div className="groupImage transition-transfrom transform-gpu  overflow-hidden">
                                                 <Link to={`/products/${product.name}/${product.key}`}>
-                                                    <img className="w-64 h-48  hover:scale-110 hover:duration-500 " src={product.imageUrl} alt={product.name}/>
+                                                    <img className="w-64 h-48  hover:scale-110 hover:duration-500" src={product.imageUrl} alt={product.name}/>
                                                 </Link>
                                             </div>
                                             <div className="items-center flex justify-between w-full bg-gray-100 p-2">
                                                 <Link to={`/products/${product.name}/${product.key}`}>
                                                     <span>{product.name}</span>
                                                 </Link>
-                                                <button className="block pr-3" onClick={()=>selectProducId(product._id)}><UilShoppingCartAlt /></button>
+                                                <button className="block pr-3" onClick={()=>selectProducId(product._id)}><GrShop /></button>
                                             </div>
                                         </div>
                                     </div>
