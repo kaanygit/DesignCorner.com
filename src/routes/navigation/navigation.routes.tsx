@@ -1,7 +1,7 @@
-import { useState } from "react"
-import { Link, Outlet } from "react-router-dom"
-
-import { UilMoon,UilSun} from '@iconscout/react-unicons'
+import React from "react"
+import { FC, useState,Fragment } from "react"
+import {BsSun} from 'react-icons/bs'
+import {BiMoon} from 'react-icons/bi'
 import { useDispatch, useSelector } from "react-redux"
 import { removeToken } from "../../redux/user/user.action"
 import products from "../../category.product.json"
@@ -10,14 +10,25 @@ import CartItem from '../../components/cart-item/cart-item.component'
 import SpinnerComponent from "../../components/spinner/spinner.component"
 import { selectUserData } from "../../redux/user-details/user.details.selector"
 import { setUserDetails } from "../../redux/user-details/user.details.action"
+import { Link, Outlet } from "react-router-dom"
+import { userDetailsInterface } from "../../redux/user-details/user.details.types"
+
+const setUserDetailsInterfaceTS:userDetailsInterface={
+    email:"",
+    name:"",
+    password:"",
+    surname:"",
+    _id:"",   
+    _v:0
+}
 
 
-const Navigation=()=>{
-    const [isMenuOpen,setMenuOpen]=useState(false);
-    const [userMenuOpen,setUserMenuOpen]=useState(false);
+const Navigation:FC=()=>{
+    const [isMenuOpen,setMenuOpen]=useState<boolean>(false);
+    const [userMenuOpen,setUserMenuOpen]=useState<boolean>(false);
     const userDetails=useSelector(selectUserData);
     
-    
+
     const dispatch=useDispatch();
     const token=useSelector(selectToken);
     const userDetay=useSelector(selectUserData)
@@ -31,7 +42,7 @@ const Navigation=()=>{
     };
     const signOutUser=()=>{
         dispatch(removeToken());
-        dispatch(setUserDetails(null))
+        dispatch(setUserDetails(setUserDetailsInterfaceTS));
         window.location.href=("/");
     };
     console.log(userDetay);
@@ -41,7 +52,7 @@ const Navigation=()=>{
 
     
     return(
-        <>  
+        <Fragment>  
           <nav className="navigation max-w-screen w-full h-auto sticky shadow-2xl  items-center text-center justify-between p-8 font-montserrat-alternates z-50">
                 <div className="navigation-divs grid grid-cols-3">
                     <div className="nav-tab-first flex items-center">
@@ -105,14 +116,13 @@ const Navigation=()=>{
                                 </>
                             )}
                             <CartItem/>
-
-                            <UilMoon />
-                            <UilSun className="sun hidden" />
+                            <BiMoon />
+                            <BsSun className="sun hidden" />
                         </div>
                 </div>
             </nav>
             <Outlet/>
-        </>
+        </Fragment>
     )
 }
 

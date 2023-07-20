@@ -1,7 +1,8 @@
+import { FC } from "react";
 import { Outlet } from "react-router-dom";
 
 
-const NotFound=()=>{
+const NotFound:FC=()=>{
     return(
         <>
             <h1>NotFound</h1>

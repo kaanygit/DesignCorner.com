@@ -34,12 +34,12 @@ app.get('/products', (req, res) => {
       console.log('users: ',product);
     })
     .catch(err => {
-      console.error('Kullanıcılar alınamadı:', err);
-      res.status(500).send('Sunucu hatası');
+      console.error('Kullanicilar alinamadi:', err);
+      res.status(500).send('Sunucu hatasi');
     });
 });
 module.exports=app;
 
 app.listen(port,()=>{
-  console.log(`Sunucu ${port} portunda çalışıyor`);
+  console.log(`Sunucu ${port} portunda çalişiyor`);
 });

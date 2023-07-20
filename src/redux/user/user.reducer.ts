@@ -1,7 +1,7 @@
 import { USER_TYPES } from "./user.type";
 
-interface initialStateInterface {
-    token: string |null;
+export interface initialStateInterface {
+    token: string | null;
     isLoading:boolean;
     error:Error | null;
 };

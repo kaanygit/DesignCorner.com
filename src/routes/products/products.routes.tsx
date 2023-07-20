@@ -1,6 +1,7 @@
+import { FC } from "react"
 import { Navigate, Outlet } from "react-router-dom"
 
-const Products=()=>{
+const Products:FC=()=>{
     return(
         <>
             <Navigate to="/products/sofa"/>

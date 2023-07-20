@@ -1,24 +1,29 @@
 import { Avatar, Button, Input } from "@material-tailwind/react";
-import { useEffect, useState } from "react"
+import React, { FC, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import {selectToken} from '../../redux/user/user.selector';
 import {selectUserData} from '../../redux/user-details/user.details.selector';
 import {setUserDetails} from '../../redux/user-details/user.details.action'
 import axios from "axios";
 
-const defaultPassword={
+interface defaultPasswordInterfaceTS{
+    oldPassword:string;
+    newPassword:string;
+    confirmNewPassword:string
+}
+const defaultPassword:defaultPasswordInterfaceTS={
     oldPassword:"",
     newPassword:"",
     confirmNewPassword:""
 }
 
-const Dashboard=()=>{
-    const [activeTab,setActiveTab]=useState(0);
-    const [formData,setFormData]=useState(defaultPassword);
-    const [formValue,setFormValue]=useState(defaultPassword);
+const Dashboard:FC=()=>{
+    const [activeTab,setActiveTab]=useState<number>(0);
+    const [formData,setFormData]=useState<defaultPasswordInterfaceTS>(defaultPassword);
+    const [formValue,setFormValue]=useState<defaultPasswordInterfaceTS>(defaultPassword);
     const dispatch=useDispatch();
     const token=useSelector(selectToken).token;
-    const userDetails=useSelector(selectUserData)
+    const userDetails=useSelector(selectUserData);
     console.log(token);
 
     const {oldPassword,newPassword,confirmNewPassword}=formValue;
@@ -26,11 +31,11 @@ const Dashboard=()=>{
     const resetDefaultForms=()=>{setFormValue(defaultPassword)};
     
     
-    const handleActiveTab=(index)=>{
+    const handleActiveTab=(index:number)=>{
         setActiveTab(index);
     };
     
-    const handleChange=(e)=>{
+    const handleChange=(e:React.ChangeEvent<HTMLInputElement>)=>{
         const {name,value}=e.target;
         setFormValue({...formValue,[name]:value});
     };
@@ -61,7 +66,7 @@ const Dashboard=()=>{
         
 
 
-    const formSubmit=(e)=>{
+    const formSubmit=(e:React.ChangeEvent<HTMLFormElement>)=>{
         e.preventDefault();
         if(newPassword!==confirmNewPassword){
             alert("Passwords are not equal");

@@ -9,12 +9,14 @@ import Checkout from "./routes/checkout/checkout.routes";
 import ForgotPassword from './components/forgotPassword/forgot-password.component'
 import Dashboard from './routes/dashboard/dashboard.routes'
 import ProductPage from "./components/productPage/product-page.component";
-import ProductCategoryPage from "./components/productCategoryPage/product-category-page.component";
 import { useSelector } from "react-redux";
 import { selectToken } from "./redux/user/user.selector";
+import ProductCategoryPage from "./components/productCategoryPage/product-category-page.component";
+import { ProductList } from "./redux/products/products.api";
 
 
 function App() {
+  ProductList();
   const token=useSelector(selectToken).token;
   return (
     <Routes>
@@ -25,12 +27,11 @@ function App() {
           <Route path='contact' element={<Contact/>} />
           <Route path='checkout' element={<Checkout/>} />
           <Route path="*" element={<NotFound/>} />
-          <Route path="dashboard" element={token===null?<Navigate to="/authentication"/>:<Dashboard/>}/>
+          {token===null?(null):(<Route path="dashboard" element={<Dashboard/>}/>)}
           <Route index element={<Home/>}/>
       </Route>
-          <Route path="/authentication" element={token===null?<Authentication/>:<Navigate to="/dashboard"/>}>
-          <Route path="forgotpassword" element={<ForgotPassword/>}/>
-        </Route>
+        <Route path="/authentication" element={token===null?<Authentication/>:<Navigate to="/dashboard"/>}/>
+        <Route path="forgotpassword" element={<ForgotPassword/>}/>
     </Routes>
 );
 }

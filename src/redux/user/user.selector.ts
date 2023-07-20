@@ -1,10 +1,11 @@
 import { createSelector } from "reselect";
+import RootState from "../root-reducer";
 
-interface initialState{
-    token:string | null;
+interface initialStateInterface{
+    readonly token:string|null
 }
 
-const getToken=(state:initialState)=>state.token;
+const getToken=(state:RootState):initialStateInterface=>state.token;
 
 export const selectToken=createSelector(
     getToken,
